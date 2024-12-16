@@ -1,0 +1,35 @@
+body {
+    font-family: sans-serif;
+    -webkit-font-smoothing: auto;
+    -moz-font-smoothing: auto;
+    -moz-osx-font-smoothing: grayscale;
+    /* font-smoothing: auto; */
+    text-rendering: optimizeLegibility;
+    font-smooth: always;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .dndflow {
+    flex-direction: row;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .reactflow-wrapper {
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  aside {
+    width: 20%;
+    min-width: 200px;
+    padding: 15px;
+    border-right: 1px solid #eee;
+    background: white;
+  }
