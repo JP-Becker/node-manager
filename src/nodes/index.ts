@@ -69,3 +69,5 @@ export const nodeTypes = {
   'TEXT': TextNode,
   'WEBLINK': WebLinkNode,
 } satisfies NodeTypes;
+
+export type AvailableNodeTypes = keyof typeof nodeTypes;

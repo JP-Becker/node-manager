@@ -1,4 +1,5 @@
 import { useRef, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -21,8 +22,7 @@ import { DnDProvider, useDnD } from './components/sidebar/DnDContext';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { AppNode } from './nodes/types';
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => `node_${uuidv4()}`;
 
 const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
@@ -52,6 +52,7 @@ const DnDFlow = () => {
       });
       const newNode: AppNode = {
         id: getId(),
+        type: type,
         position,
         data: { label: `${type} node` },
       };

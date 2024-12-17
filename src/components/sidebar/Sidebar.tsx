@@ -1,10 +1,13 @@
 import React from 'react';
 
 import { useDnD } from './DnDContext';
+import { AvailableNodeTypes } from '../../nodes';
+
+
 
 export const Sidebar = () => {
   const [_, setType] = useDnD();
-  const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: string) => {
+  const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: AvailableNodeTypes) => {
     setType(nodeType);
     event.dataTransfer.effectAllowed = 'move';
   };
