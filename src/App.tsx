@@ -20,9 +20,9 @@ import { initialNodes, nodeTypes } from './nodes';
 import { initialEdges, edgeTypes } from './edges';
 import { DnDProvider, useDnD } from './components/sidebar/DnDContext';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { AppNode } from './nodes/types';
+import { AppNode, OptionNode } from './nodes/types';
 
-const getId = () => `node_${uuidv4()}`;
+const getId = () => uuidv4();
 
 const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
@@ -41,20 +41,19 @@ const DnDFlow = () => {
   const onDrop = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-
-      if (!type) {
-        return;
-      }
+      if (!type) return;
 
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
+
       const newNode: AppNode = {
         id: getId(),
-        type: type,
+        type,
         position,
-        data: { label: `${type} node` },
+        nextNodeId: null,
+        data: { url: '', title: '', text: '', options: []},
       };
 
       setNodes((nds) => nds.concat(newNode));

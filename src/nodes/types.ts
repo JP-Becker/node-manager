@@ -1,6 +1,17 @@
 import type { Node, BuiltInNode } from '@xyflow/react';
 
-interface MenuOption {
+interface NodeStructure {
+  
+    id: string,
+    type: string,
+    position: {x: number, y: number},
+    nextNodeId: string | null,
+    content: {
+      text: string,
+    },
+}
+
+interface MenuOption extends Node{
   id: string;
   type: 'OPTION';
   nextNodeId: string | null;

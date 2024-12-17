@@ -21,8 +21,8 @@ export const Sidebar = () => {
       <div className="dndnode text" onDragStart={(event) => onDragStart(event, 'TEXT')} draggable>
         Text Node
       </div>
-      <div className="dndnode option" onDragStart={(event) => onDragStart(event, 'OPTION')} draggable>
-        Option Node
+      <div className="dndnode option" onDragStart={(event) => onDragStart(event, 'WEBLINK')} draggable>
+        Web Link Node
       </div>
     </aside>
   );
