@@ -1,23 +1,18 @@
 import type { Node, BuiltInNode } from '@xyflow/react';
 
-interface NodeStructure {
-  
+export interface NodeStructure {
     id: string,
     type: string,
     position: {x: number, y: number},
     nextNodeId: string | null,
-    content: {
-      text: string,
-    },
+    content: object,
 }
 
-interface MenuOption extends Node{
-  id: string;
-  type: 'OPTION';
-  nextNodeId: string | null;
-  content: {
-    name: string;
-  };
+interface MenuOption extends NodeStructure {
+    type: 'OPTION';
+    content: {
+        name: string;
+    }
 }
 
 export type WebLinkNode = Node<
@@ -29,7 +24,17 @@ export type WebLinkNode = Node<
   'WEBLINK'
 >;
 
-export type MenuNode = Node<{ text: string; options: MenuOption[] }, 'MENU'>;
+export type MenuNode = Node<{
+    text: string;
+    options: {
+        id: string;
+        type: 'OPTION';
+        nextNodeId: string | null;
+        content: {
+            name: string;
+        };
+    }[];
+}, 'MENU'>;
 export type OptionNode = Node<MenuOption['content'], 'OPTION'>;
 export type TextNode = Node<{ text: string }, 'TEXT'>;
 export type PositionLoggerNode = Node<{ label: string }, 'position-logger'>;

@@ -14,7 +14,7 @@ export const Sidebar = () => {
 
   return (
     <aside>
-      <div className="description">You can drag these nodes to the pane on the right.</div>
+      <div className="description">Clique e arraste o nó desejado.</div>
       <div className="dndnode menu" onDragStart={(event) => onDragStart(event, 'MENU')} draggable>
         Menu Node
       </div>

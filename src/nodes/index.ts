@@ -18,7 +18,7 @@ export const initialNodes: AppNode[] = [
         {
           id: '2fcd8220-3a38-4eba-9663-adac420f81f7',
           type: 'OPTION',
-          nextNodeId: '0b734a53-7d4e-4b92-8146-bdbccbeec94b',
+          nextNodeId: null,
           content: {
             name: 'Guia de compatibilidade',
           },
@@ -26,7 +26,7 @@ export const initialNodes: AppNode[] = [
         {
           id: '4bdbced0-1c7c-4c61-914d-080b3503c3fe',
           type: 'OPTION',
-          nextNodeId: '2f86d307-d88d-4bb1-aadd-51f60dbd0392',
+          nextNodeId: null,
           content: {
             name: 'Especificações de produto',
           },
@@ -34,7 +34,7 @@ export const initialNodes: AppNode[] = [
         {
           id: '4bf54792-1498-4b78-b073-178b8bc81376',
           type: 'OPTION',
-          nextNodeId: 'f2095179-39aa-467d-96a7-3205378f86f4',
+          nextNodeId: null,
           content: {
             name: 'Guia de instalação',
           },

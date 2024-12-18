@@ -20,7 +20,7 @@ import { initialNodes, nodeTypes } from './nodes';
 import { initialEdges, edgeTypes } from './edges';
 import { DnDProvider, useDnD } from './components/sidebar/DnDContext';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { AppNode, OptionNode } from './nodes/types';
+import { AppNode } from './nodes/types';
 
 const getId = () => uuidv4();
 
@@ -48,13 +48,17 @@ const DnDFlow = () => {
         y: event.clientY,
       });
 
-      const newNode: AppNode = {
+      const newNode = {
         id: getId(),
         type,
         position,
-        nextNodeId: null,
-        data: { url: '', title: '', text: '', options: []},
-      };
+        data: {
+          url: '',
+          title: '',
+          text: '',
+          options: [],
+        },
+      } as AppNode;
 
       setNodes((nds) => nds.concat(newNode));
     },
