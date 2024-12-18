@@ -16,13 +16,13 @@ interface MenuOption extends NodeStructure {
 }
 
 export type WebLinkNode = Node<
-  {
-    url: string;
-    title: string;
-    text: string;
-  },
-  'WEBLINK'
->;
+    {
+        url: string;
+        title: string;
+        text: string;
+    },
+    'WEBLINK'
+>
 
 export type MenuNode = Node<{
     text: string;

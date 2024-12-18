@@ -47,21 +47,30 @@ const DnDFlow = () => {
         x: event.clientX,
         y: event.clientY,
       });
-
-      const newNode = {
-        id: getId(),
+      let newNode: AppNode;
+      if (type === 'MENU') {
+        newNode = {
+          id: getId(),
         type,
         position,
         data: {
-          url: '',
-          title: '',
           text: '',
-          options: [],
+          options: [
+            {
+              id: getId(),
+              type: 'OPTION',
+              nextNodeId: null,
+              content: {
+                name: '',
+              },
+            },
+          ],
         },
-      } as AppNode;
+      }
 
       setNodes((nds) => nds.concat(newNode));
-    },
+      console.log(newNode);
+    }},
     [screenToFlowPosition, type, setNodes]
   );
 
