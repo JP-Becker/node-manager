@@ -41,6 +41,7 @@ const DnDFlow = () => {
   const onDrop = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
+
       if (!type) return;
 
       const position = screenToFlowPosition({
@@ -67,7 +68,6 @@ const DnDFlow = () => {
           ],
         },
       }
-
       setNodes((nds) => nds.concat(newNode));
       console.log(newNode);
     }},
