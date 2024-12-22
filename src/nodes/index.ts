@@ -47,19 +47,23 @@ export const initialNodes: AppNode[] = [
     type: 'TEXT',
     position: { x: 0, y: 200 },
     data: {
-      text: '🌐 Para acesso ao manual de instalação, acesse o link abaixo:',
+      nextNodeId: null,
+      content: {
+        text: '🌐 Para acesso ao manual de instalação, acesse o link abaixo:',
+      }
     },
-    nextNodeId: null,
   },
   {
     id: 'f9e1677c-7905-4670-bef2-3d18c162a4f9',
     type: 'WEBLINK',
     position: { x: 0, y: 400 },
-    nextNodeId: null,
     data: {
-      url: 'https://manuais-switches.intelbras.com.br/pt-BR/Dashboard_Redes/tabela.html',
-      title: 'Suporte Redes',
-      text: 'Manuais disponíveis',
+      nextNodeId: null,
+      content: {
+        url: 'https://manuais-switches.intelbras.com.br/pt-BR/Dashboard_Redes/tabela.html',
+        title: 'Suporte Redes',
+        text: 'Manuais disponíveis',
+      }
     },
     
   },

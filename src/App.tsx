@@ -68,12 +68,41 @@ const DnDFlow = () => {
           ],
         },
       }
-      setNodes((nds) => nds.concat(newNode));
-      console.log(newNode);
-    }},
+      
+    } else if (type === 'TEXT') {
+      newNode = {
+        id: getId(),
+        type,
+        position,
+        data: {
+          nextNodeId: null,
+          content: {
+            text: '',
+          }
+        },
+      }
+    } else if (type === 'WEBLINK') {
+      newNode = {
+        id: getId(),
+        type,
+        position,
+        data: {
+          nextNodeId: null,
+          content: {
+            url: '',
+            title: '',
+            text: '',
+          }
+        },
+      }
+    }
+  
+    setNodes((nds) => nds.concat(newNode));
+   
+  },
     [screenToFlowPosition, type, setNodes]
   );
-
+  console.log(nodes);
   return (
     <div className="dndflow">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>

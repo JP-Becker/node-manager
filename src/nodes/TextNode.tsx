@@ -6,7 +6,7 @@ export function TextNode({ data }: NodeProps<TextNodeType>) {
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
       <Handle type="target" position={Position.Top} />
       <div style={{ marginBottom: '8px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Texto:</div>
-      <div>{data.text}</div>
+      <div>{data.content.text}</div>
       <Handle type="source" position={Position.Bottom} />
     </div>
   );
