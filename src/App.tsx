@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import {
   ReactFlow,
@@ -33,6 +33,19 @@ const DnDFlow = () => {
 
   const onConnect: OnConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), []);
 
+  function getNextNodeIds() {
+    const currentNodeIds = nodes.map((node) => node.id);
+    const connectedEdges = edges.filter((edge) => currentNodeIds.includes(edge.source));
+    
+      if (connectedEdges.length > 0) {
+      const lastEdge = connectedEdges[connectedEdges.length - 1];
+      return lastEdge.target;
+    }
+    
+    
+    return null;
+  }
+
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
@@ -49,60 +62,66 @@ const DnDFlow = () => {
         y: event.clientY,
       });
       let newNode: AppNode;
-      if (type === 'MENU') {
-        newNode = {
-          id: getId(),
-        type,
-        position,
-        data: {
-          text: '',
-          options: [
-            {
-              id: getId(),
-              type: 'OPTION',
-              nextNodeId: null,
-              content: {
-                name: '',
-              },
+      switch (type) {
+        case 'MENU':
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            data: {
+              text: '',
+              options: [
+                {
+                  id: getId(),
+                  type: 'OPTION',
+                  nextNodeId: getNextNodeIds(),
+                  content: {
+                    name: '',
+                  },
+                },
+              ],
             },
-          ],
-        },
-      }
+          };
+          break;
       
-    } else if (type === 'TEXT') {
-      newNode = {
-        id: getId(),
-        type,
-        position,
-        data: {
-          nextNodeId: null,
-          content: {
-            text: '',
-          }
-        },
+        case 'TEXT':
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            data: {
+              nextNodeId: getNextNodeIds(),
+              content: {
+                text: '',
+              }
+            },
+          };
+          break;
+      
+        case 'WEBLINK':
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            data: {
+              nextNodeId: getNextNodeIds(),
+              content: {
+                url: '',
+                title: '',
+                text: '',
+              }
+            },
+          };
+          break;
       }
-    } else if (type === 'WEBLINK') {
-      newNode = {
-        id: getId(),
-        type,
-        position,
-        data: {
-          nextNodeId: null,
-          content: {
-            url: '',
-            title: '',
-            text: '',
-          }
-        },
-      }
-    }
   
     setNodes((nds) => nds.concat(newNode));
    
   },
     [screenToFlowPosition, type, setNodes]
   );
-  console.log(nodes);
+  const nodeASerAlterado = nodes.filter((node) => node.id === getNextNodeIds())
+  console.log(nodeASerAlterado);
   return (
     <div className="dndflow">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>
