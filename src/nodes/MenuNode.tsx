@@ -1,8 +1,28 @@
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, type NodeProps, useReactFlow, Node } from '@xyflow/react';
 import { MenuNode as MenuNodeType } from './types';
 import { LabeledHandle } from '../components/LabeledHandle';
 
-export function MenuNode({ data }: NodeProps<MenuNodeType>) {
+export function MenuNode({ data, id}: NodeProps<MenuNodeType>) {
+  const { setNodes } = useReactFlow();
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newText = event.target.value;
+    setNodes((nodes: Node[]) => 
+      nodes.map((node: Node) => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              text: newText
+            }
+          };
+        }
+        return node;
+      })
+    );
+  };
+
   return (
     <div className="react-flow__node-default" style={{ 
       minWidth: '250px',
@@ -26,7 +46,18 @@ export function MenuNode({ data }: NodeProps<MenuNodeType>) {
         textAlign: 'center',
         fontSize: '12px',
       }}>
-        {data.text}
+        <input
+        value={data.text}
+        onChange={handleTextChange}
+        style={{ 
+          width: '100%',
+          marginBottom: '15px',
+          textAlign: 'center',
+          fontSize: '12px',
+          border: 'none',
+          background: 'transparent'
+        }}
+      />
       </div>
 
       <div style={{ 
