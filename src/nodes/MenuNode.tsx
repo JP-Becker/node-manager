@@ -1,8 +1,15 @@
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { MenuNode as MenuNodeType } from './types';
 import { LabeledHandle } from '../components/LabeledHandle';
+import { useState } from 'react';
 
 export function MenuNode({ data }: NodeProps<MenuNodeType>) {
+  const [text, setText] = useState(data.text); // Adicione esta linha
+
+  const handleTextChange = (event: React.FormEvent<HTMLDivElement>) => {
+    setText(event.currentTarget.textContent || ''); // Atualize o estado com o texto editado
+  };
+
   return (
     <div className="react-flow__node-default" style={{ 
       minWidth: '250px',
@@ -26,7 +33,15 @@ export function MenuNode({ data }: NodeProps<MenuNodeType>) {
         textAlign: 'center',
         fontSize: '12px',
       }}>
-        {data.text}
+       <div 
+          contentEditable 
+          suppressContentEditableWarning 
+          style={{ border: '1px solid #ccc', padding: '5px', borderRadius: '4px' }}
+          onInput={handleTextChange}
+        >
+          {text}
+        </div>
+        
       </div>
 
       <div style={{ 

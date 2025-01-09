@@ -121,7 +121,7 @@ const DnDFlow = () => {
     [screenToFlowPosition, type, setNodes]
   );
   const nodeASerAlterado = nodes.filter((node) => node.id === getNextNodeIds())
-  console.log(nodeASerAlterado);
+  console.log(nodes);
   return (
     <div className="dndflow">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>
