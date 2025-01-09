@@ -23,6 +23,17 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType>) {
     );
   };
 
+  const handleAddOption = () => {
+    data.options.push({
+      id: crypto.randomUUID(),
+      type: 'OPTION',
+      nextNodeId: null,
+      content: {
+        name: 'Nova Opção'
+      }
+    });
+  };
+
   return (
     <div className="react-flow__node-default" style={{ 
       minWidth: '250px',
@@ -54,22 +65,40 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType>) {
           marginBottom: '15px',
           textAlign: 'center',
           fontSize: '12px',
-          border: 'none',
+          border: '1px solid black',
           background: 'transparent'
         }}
       />
       </div>
 
       <div style={{ 
+        display: 'flex',
+        justifyContent: 'space-between',
         marginBottom: '8px',
         color: '#555',
         fontSize: '12px',
         borderBottom: '1px solid #eee',
-        paddingBottom: '4px',
         textAlign: 'left',
         fontWeight: 'bold'
       }}>
         Opções:
+        <div>
+        <button 
+          onClick={handleAddOption}
+          style={{
+            padding: '2px 8px',
+            fontSize: '12px',
+            background: 'black',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          +
+        </button>
+        </div>
+        
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column' }}>

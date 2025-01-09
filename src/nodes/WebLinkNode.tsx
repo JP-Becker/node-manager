@@ -38,7 +38,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
           width: '100%',
           marginBottom: '8px',
           textAlign: 'center',
-          border: 'none',
+          border: '1px solid black',
           background: 'transparent'
         }}
       />
@@ -51,7 +51,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
           width: '100%',
           marginBottom: '8px',
           textAlign: 'center',
-          border: 'none',
+          border: '1px solid black',
           background: 'transparent'
         }}
       />
@@ -65,7 +65,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
           color: '#0066cc',
           textAlign: 'center',
           textDecoration: 'underline',
-          border: 'none',
+          border: '1px solid black',
           background: 'transparent'
         }}
       />
