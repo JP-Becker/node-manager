@@ -1,12 +1,12 @@
-import { Handle, Position, type NodeProps, useReactFlow } from '@xyflow/react';
+import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
 import { WebLinkNode as WebLinkNodeType } from './types';
 
 export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
-  const { setNodes } = useReactFlow();
+  const { setNodes, deleteElements } = useReactFlow();
 
   const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setNodes((nodes) => 
+    setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
           const typedNode = node as WebLinkNodeType;
@@ -26,15 +26,25 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
     );
   };
 
+  const handleDelete = () => {
+    deleteElements({ nodes: [{ id }] });
+  };
+
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
+      <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
+        <button onClick={handleDelete}>delete</button>
+        <button>copy</button>
+        <button>expand</button>
+      </NodeToolbar>
+
       <Handle type="target" position={Position.Top} />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
       <input
         value={data.content.title}
         onChange={handleChange('title')}
-        style={{ 
+        style={{
           width: '100%',
           marginBottom: '8px',
           textAlign: 'center',
@@ -47,7 +57,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
       <input
         value={data.content.text}
         onChange={handleChange('text')}
-        style={{ 
+        style={{
           width: '100%',
           marginBottom: '8px',
           textAlign: 'center',
@@ -60,7 +70,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
       <input
         value={data.content.url}
         onChange={handleChange('url')}
-        style={{ 
+        style={{
           width: '100%',
           color: '#0066cc',
           textAlign: 'center',

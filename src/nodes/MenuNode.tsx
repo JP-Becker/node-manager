@@ -1,9 +1,9 @@
-import { Handle, Position, type NodeProps, useReactFlow, Node } from '@xyflow/react';
+import { Handle, Position, type NodeProps, useReactFlow, Node, NodeToolbar, NodeToolbarProps } from '@xyflow/react';
 import { MenuNode as MenuNodeType } from './types';
 import { LabeledHandle } from '../components/LabeledHandle';
 
-export function MenuNode({ data, id}: NodeProps<MenuNodeType>) {
-  const { setNodes } = useReactFlow();
+export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps) {
+  const { setNodes, deleteElements } = useReactFlow();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newText = event.target.value;
@@ -24,14 +24,34 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType>) {
   };
 
   const handleAddOption = () => {
-    data.options.push({
-      id: crypto.randomUUID(),
-      type: 'OPTION',
-      nextNodeId: null,
-      content: {
-        name: 'Nova Opção'
-      }
-    });
+    setNodes((nodes: Node[]) => 
+      nodes.map((node: Node) => {
+        if (node.id === id) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              options: [
+                ...node.data.options,
+                {
+                  id: crypto.randomUUID(),
+                  type: 'OPTION',
+                  nextNodeId: null,
+                  content: {
+                    name: 'Nova Opção'
+                  }
+                }
+              ]
+            }
+          };
+        }
+        return node;
+      })
+    );
+  };
+
+  const handleDelete = () => {
+    deleteElements({ nodes: [{ id }] });
   };
 
   return (
@@ -40,6 +60,12 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType>) {
       padding: '15px',
       borderRadius: '8px'
     }}>
+      <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
+        <button onClick={handleDelete}>delete</button>
+        <button>copy</button>
+        <button>expand</button>
+      </NodeToolbar>
+
       <Handle type="target" position={Position.Top} />
       
       <div style={{ 

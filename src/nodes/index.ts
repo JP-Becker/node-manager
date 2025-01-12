@@ -42,31 +42,31 @@ export const initialNodes: AppNode[] = [
       ],
     },
   },
-  {
-    id: '0b734a53-7d4e-4b92-8146-bdbccbeec94b',
-    type: 'TEXT',
-    position: { x: 0, y: 200 },
-    data: {
-      nextNodeId: null,
-      content: {
-        text: '🌐 Para acesso ao manual de instalação, acesse o link abaixo:',
-      }
-    },
-  },
-  {
-    id: 'f9e1677c-7905-4670-bef2-3d18c162a4f9',
-    type: 'WEBLINK',
-    position: { x: 0, y: 400 },
-    data: {
-      nextNodeId: null,
-      content: {
-        url: 'https://manuais-switches.intelbras.com.br/pt-BR/Dashboard_Redes/tabela.html',
-        title: 'Suporte Redes',
-        text: 'Manuais disponíveis',
-      }
-    },
+  // {
+  //   id: '0b734a53-7d4e-4b92-8146-bdbccbeec94b',
+  //   type: 'TEXT',
+  //   position: { x: 0, y: 200 },
+  //   data: {
+  //     nextNodeId: null,
+  //     content: {
+  //       text: '🌐 Para acesso ao manual de instalação, acesse o link abaixo:',
+  //     }
+  //   },
+  // },
+  // {
+  //   id: 'f9e1677c-7905-4670-bef2-3d18c162a4f9',
+  //   type: 'WEBLINK',
+  //   position: { x: 0, y: 400 },
+  //   data: {
+  //     nextNodeId: null,
+  //     content: {
+  //       url: 'https://manuais-switches.intelbras.com.br/pt-BR/Dashboard_Redes/tabela.html',
+  //       title: 'Suporte Redes',
+  //       text: 'Manuais disponíveis',
+  //     }
+  //   },
     
-  },
+  // },
 ];
 
 export const nodeTypes = {

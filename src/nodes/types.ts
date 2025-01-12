@@ -8,11 +8,13 @@ export interface NodeStructure {
     content: object,
 }
 
-interface MenuOption extends NodeStructure {
+export interface MenuOptionData {
+    id: string;
     type: 'OPTION';
+    nextNodeId: string | null;
     content: {
         name: string;
-    }
+    };
 }
 
 export type WebLinkNode = Node<
@@ -38,16 +40,9 @@ export type TextNode = Node<
 
 export type MenuNode = Node<{
     text: string;
-    options: {
-        id: string;
-        type: 'OPTION';
-        nextNodeId: string | null;
-        content: {
-            name: string;
-        };
-    }[];
+    options: MenuOptionData[];
 }, 'MENU'>;
-export type OptionNode = Node<MenuOption['content'], 'OPTION'>;
+export type OptionNode = Node<MenuOptionData['content'], 'OPTION'>;
 
 export type PositionLoggerNode = Node<{ label: string }, 'position-logger'>;
 export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode;
