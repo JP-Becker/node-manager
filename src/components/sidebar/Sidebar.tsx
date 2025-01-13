@@ -4,14 +4,10 @@ import { useDnD } from './DnDContext';
 import { AvailableNodeTypes } from '../../nodes';
 import { useReactFlow } from '@xyflow/react';
 
-
-
 export const Sidebar = () => {
   const [_, setType] = useDnD();
   const { getNodes } = useReactFlow();
 
-  
-  
   const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: AvailableNodeTypes) => {
     setType(nodeType);
     event.dataTransfer.effectAllowed = 'move';
@@ -19,13 +15,13 @@ export const Sidebar = () => {
 
   const handleExport = () => {
     const nodes = getNodes();
-    
+
     const formatNode = (node) => {
       const baseNode = {
         id: node.id,
         type: node.type,
       };
-  
+
       switch (node.type) {
         case 'MENU':
           return {
@@ -33,10 +29,20 @@ export const Sidebar = () => {
             nextNodeId: null,
             content: {
               text: node.data.text,
-              options: node.data.options
-            }
+              options: node.data.options,
+            },
           };
-  
+
+          case 'QUICK_REPLY':
+          return {
+            ...baseNode,
+            nextNodeId: null,
+            content: {
+              text: node.data.text,
+              options: node.data.options,
+            },
+          };
+
         case 'WEBLINK':
           return {
             ...baseNode,
@@ -44,48 +50,48 @@ export const Sidebar = () => {
             content: {
               url: node.data.content.url,
               title: node.data.content.title,
-              text: node.data.content.text
-            }
+              text: node.data.content.text,
+            },
           };
 
-          case 'IMAGE':
+        case 'IMAGE':
           return {
             ...baseNode,
             nextNodeId: node.data.nextNodeId,
             content: {
               url: node.data.content.url,
               title: node.data.content.title,
-              text: node.data.content.text
-            }
+              text: node.data.content.text,
+            },
           };
-  
+
         case 'TEXT':
           return {
             ...baseNode,
             nextNodeId: node.data.nextNodeId,
             content: {
-              text: node.data.content.text
-            }
+              text: node.data.content.text,
+            },
           };
-  
+
         default:
           return baseNode;
       }
     };
-  
+
     const formattedNodes = nodes.map(formatNode);
     const jsonData = JSON.stringify(formattedNodes, null, 2);
-    
+
     const blob = new Blob([jsonData], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    
+
     const link = document.createElement('a');
     link.href = url;
     link.download = 'nodes-export.json';
-    
+
     document.body.appendChild(link);
     link.click();
-    
+
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
@@ -105,8 +111,11 @@ export const Sidebar = () => {
       <div className="dndnode option" onDragStart={(event) => onDragStart(event, 'IMAGE')} draggable>
         Image Node
       </div>
+      <div className="dndnode quick-reply" onDragStart={(event) => onDragStart(event, 'QUICK_REPLY')} draggable>
+        Quick Reply Node
+      </div>
 
-      <button 
+      <button
         onClick={handleExport}
         style={{
           width: '100%',
@@ -117,7 +126,7 @@ export const Sidebar = () => {
           border: 'none',
           borderRadius: '4px',
           cursor: 'pointer',
-          fontSize: '12px'
+          fontSize: '12px',
         }}
       >
         Exportar Nodes

@@ -54,7 +54,13 @@ export type MenuNode = Node<{
     text: string;
     options: MenuOptionData[];
 }, 'MENU'>;
+
+export type QuickReplyNode = Node<{
+    text: string;
+    options: MenuOptionData[];
+}, 'QUICK_REPLY'>;
+
 export type OptionNode = Node<MenuOptionData['content'], 'OPTION'>;
 
 export type PositionLoggerNode = Node<{ label: string }, 'position-logger'>;
-export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode;
+export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode | QuickReplyNode;

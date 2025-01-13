@@ -7,6 +7,7 @@ import { TextNode } from './TextNode';
 import { AppNode } from './types';
 import { WebLinkNode } from './WebLinkNode';
 import { ImageNode } from './ImageNode';
+import { QuickReplyNode } from './QuickReplyNode';
 
 export const initialNodes: AppNode[] = [
   {
@@ -77,6 +78,7 @@ export const nodeTypes = {
   'TEXT': TextNode,
   'WEBLINK': WebLinkNode,
   'IMAGE': ImageNode,
+  'QUICK_REPLY': QuickReplyNode,
 } satisfies NodeTypes;
 
 export type AvailableNodeTypes = keyof typeof nodeTypes;

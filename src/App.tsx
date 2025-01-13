@@ -136,7 +136,7 @@ const DnDFlow = () => {
         y: event.clientY,
       });
       let newNode: AppNode;
-      if (type === 'MENU') {
+      if (type === 'MENU' || type === 'QUICK_REPLY') {
         newNode = {
           id: getId(),
         type,
