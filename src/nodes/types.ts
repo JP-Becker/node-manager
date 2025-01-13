@@ -38,6 +38,18 @@ export type TextNode = Node<
     }, 'TEXT'
 >;
 
+export type ImageNode = Node<
+    {
+        nextNodeId: string | null;
+        content: {
+            url: string;
+            title: string;
+            text: string;
+        }
+    },
+    'IMAGE'
+>;
+
 export type MenuNode = Node<{
     text: string;
     options: MenuOptionData[];
@@ -45,4 +57,4 @@ export type MenuNode = Node<{
 export type OptionNode = Node<MenuOptionData['content'], 'OPTION'>;
 
 export type PositionLoggerNode = Node<{ label: string }, 'position-logger'>;
-export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode;
+export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode;

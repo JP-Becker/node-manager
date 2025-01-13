@@ -1,7 +1,7 @@
 import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
-import { WebLinkNode as WebLinkNodeType } from './types';
+import { ImageNode as ImageNodeType } from './types';
 
-export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
+export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
   const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +9,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
     setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
-          const typedNode = node as WebLinkNodeType;
+          const typedNode = node as ImageNodeType;
           return {
             ...node,
             data: {
@@ -66,7 +66,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
         }}
       />
 
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL:</div>
+      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL da Imagem:</div>
       <input
         value={data.content.url}
         onChange={handleChange('url')}

@@ -183,6 +183,21 @@ const DnDFlow = () => {
         },
       }
     }
+    else if (type === 'IMAGE') {
+      newNode = {
+        id: getId(),
+        type,
+        position,
+        data: {
+          nextNodeId: null,
+          content: {
+            url: '',
+            title: '',
+            text: '',
+          }
+        },
+      }
+    }
   
     setNodes((nds) => nds.concat(newNode));
    

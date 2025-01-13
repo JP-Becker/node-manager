@@ -36,7 +36,7 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
         <button>copy</button>
         <button>expand</button>
       </NodeToolbar>
-      <Handle type="target" position={Position.Top} />
+      <Handle type="target" position={Position.Left} />
       <div style={{ marginBottom: '8px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Texto:</div>
       <div>
       <textarea
@@ -60,7 +60,7 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
           rows={1}                  
         />
       </div>
-      <Handle type="source" position={Position.Bottom} />
+      <Handle type="source" position={Position.Right} />
     </div>
   );
 }

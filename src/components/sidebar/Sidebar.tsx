@@ -47,6 +47,17 @@ export const Sidebar = () => {
               text: node.data.content.text
             }
           };
+
+          case 'IMAGE':
+          return {
+            ...baseNode,
+            nextNodeId: node.data.nextNodeId,
+            content: {
+              url: node.data.content.url,
+              title: node.data.content.title,
+              text: node.data.content.text
+            }
+          };
   
         case 'TEXT':
           return {
@@ -90,6 +101,9 @@ export const Sidebar = () => {
       </div>
       <div className="dndnode option" onDragStart={(event) => onDragStart(event, 'WEBLINK')} draggable>
         Web Link Node
+      </div>
+      <div className="dndnode option" onDragStart={(event) => onDragStart(event, 'IMAGE')} draggable>
+        Image Node
       </div>
 
       <button 

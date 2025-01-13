@@ -6,6 +6,7 @@ import { OptionNode } from './OptionNode';
 import { TextNode } from './TextNode';
 import { AppNode } from './types';
 import { WebLinkNode } from './WebLinkNode';
+import { ImageNode } from './ImageNode';
 
 export const initialNodes: AppNode[] = [
   {
@@ -75,6 +76,7 @@ export const nodeTypes = {
   'OPTION': OptionNode,
   'TEXT': TextNode,
   'WEBLINK': WebLinkNode,
+  'IMAGE': ImageNode,
 } satisfies NodeTypes;
 
 export type AvailableNodeTypes = keyof typeof nodeTypes;

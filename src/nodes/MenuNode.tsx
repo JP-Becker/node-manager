@@ -66,7 +66,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
         <button>expand</button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Top} />
+      <Handle type="target" position={Position.Left} />
       
       <div style={{ 
         marginBottom: '4px',
