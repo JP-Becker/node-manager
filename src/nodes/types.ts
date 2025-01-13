@@ -60,7 +60,17 @@ export type QuickReplyNode = Node<{
     options: MenuOptionData[];
 }, 'QUICK_REPLY'>;
 
+export type GoToBlockNode = Node<
+    {   
+        id: string;
+        nextNodeId: string | null;
+        content: {
+            id: string;
+        }
+    }, 'GO_TO_BLOCK'
+>;
+
 export type OptionNode = Node<MenuOptionData['content'], 'OPTION'>;
 
 export type PositionLoggerNode = Node<{ label: string }, 'position-logger'>;
-export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode | QuickReplyNode;
+export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode | QuickReplyNode | GoToBlockNode;
