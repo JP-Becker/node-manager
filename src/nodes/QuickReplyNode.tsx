@@ -60,6 +60,7 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
       padding: '15px',
       borderRadius: '8px'
     }}>
+      <h2>QUICK REPLY</h2>
       <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
         <button onClick={handleDelete}>delete</button>
         <button>copy</button>
@@ -86,6 +87,7 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
         <input
         value={data.text}
         onChange={handleTextChange}
+        maxLength={72} 
         style={{ 
           width: '100%',
           marginBottom: '15px',

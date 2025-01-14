@@ -32,6 +32,7 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
 
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
+      <h2>NODE DE IMAGEM</h2>
       <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
         <button onClick={handleDelete}>delete</button>
         <button>copy</button>

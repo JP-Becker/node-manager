@@ -31,6 +31,7 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
   
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }}>
+      <h2>NODE DE TEXTO</h2>
       <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
         <button onClick={handleDelete}>delete</button>
         <button>copy</button>

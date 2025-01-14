@@ -85,6 +85,7 @@ export function LabeledHandle({ id, label, type, position }: LabeledHandleProps)
     <input
       value={label}
       onChange={handleTextChange}
+      maxLength={20}
       style={{ 
         width: '100%',
         marginBottom: '15px',

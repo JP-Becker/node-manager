@@ -74,12 +74,27 @@ export const Sidebar = () => {
             },
           };
 
+          case 'GO_TO_BLOCK':
+          return {
+            ...baseNode,
+            nextNodeId: node.data.nextNodeId,
+            content: {
+              id: node.data.content.id,
+            },
+          };
+
         default:
           return baseNode;
       }
     };
 
-    const formattedNodes = nodes.map(formatNode);
+    const sortedNodes = nodes.sort((a, b) => {
+      if (a.type === 'GO_TO_BLOCK' && b.type !== 'GO_TO_BLOCK') return 1;
+      if (a.type !== 'GO_TO_BLOCK' && b.type === 'GO_TO_BLOCK') return -1;
+      return 0;
+    });
+
+    const formattedNodes = sortedNodes.map(formatNode);
     const jsonData = JSON.stringify(formattedNodes, null, 2);
 
     const blob = new Blob([jsonData], { type: 'application/json' });

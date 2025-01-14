@@ -22,7 +22,6 @@ import { initialEdges, edgeTypes } from './edges';
 import { DnDProvider, useDnD } from './components/sidebar/DnDContext';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { AppNode, MenuNode, MenuOptionData } from './nodes/types';
-import { CustomEdge } from './edges/CustomEdge';
 
 const getId = () => uuidv4();
 

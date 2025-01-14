@@ -60,6 +60,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
       padding: '15px',
       borderRadius: '8px'
     }}>
+      <h2>MENU</h2>
       <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
         <button onClick={handleDelete}>delete</button>
         <button>copy</button>
