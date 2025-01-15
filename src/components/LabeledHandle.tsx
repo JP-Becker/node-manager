@@ -99,6 +99,7 @@ export function LabeledHandle({ id, label, type, position }: LabeledHandleProps)
         type={type}
         position={position}
         id={id}
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
       />
     </div>
   );

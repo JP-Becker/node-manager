@@ -80,7 +80,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
           background: 'transparent'
         }}
       />
-      <Handle type="source" position={Position.Right} />
+      <Handle type="source" position={Position.Right} style={{ width: '15px', height: '15px' }}/>
     </div>
   );
 }

@@ -27,11 +27,20 @@ export function OptionNode({ data, id }: NodeProps<OptionNodeType>) {
 
   return (
     <div className="react-flow__node-default">
-      <Handle type="target" position={Position.Top} />
+      <Handle 
+        type="target" 
+        position={Position.Top} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
       <div>
         {data.name}
       </div>
-      <Handle type="source" position={Position.Bottom} id="a" />
+      <Handle 
+        type="source" 
+        position={Position.Bottom} 
+        id="a" 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
     </div>
   );
 }

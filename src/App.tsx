@@ -43,41 +43,41 @@ const DnDFlow = () => {
     });
   }, []);
 
-  const onEdgeDelete = useCallback((edgeId: string) => {
-    const edgeToDelete: Edge | undefined = edges.find(edge => edge.id === edgeId);
+ 
+  //   const edgeToDelete: Edge | undefined = edges.find(edge => edge.id === edgeId);
 
-    // Atualiza o nextNodeId do nó fonte
-    setNodes((nds: AppNode[]) => {
-      return nds.map((node) => {
-        if (node.id === edgeToDelete.source) {
-          if (node.type === 'MENU') {
-            const menuNode = node as MenuNode;
-            return {
-              ...menuNode,
-              data: {
-                ...menuNode.data,
-                options: menuNode.data.options.map((option: MenuOptionData) => {
-                  if (option.id === edgeToDelete.sourceHandle) {
-                    return { ...option, nextNodeId: null };
-                  }
-                  return option;
-                })
-              }
-            } as AppNode;
-          }
+  //   // Atualiza o nextNodeId do nó fonte
+  //   setNodes((nds: AppNode[]) => {
+  //     return nds.map((node) => {
+  //       if (node.id === edgeToDelete.source) {
+  //         if (node.type === 'MENU') {
+  //           const menuNode = node as MenuNode;
+  //           return {
+  //             ...menuNode,
+  //             data: {
+  //               ...menuNode.data,
+  //               options: menuNode.data.options.map((option: MenuOptionData) => {
+  //                 if (option.id === edgeToDelete.sourceHandle) {
+  //                   return { ...option, nextNodeId: null };
+  //                 }
+  //                 return option;
+  //               })
+  //             }
+  //           } as AppNode;
+  //         }
           
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              nextNodeId: null
-            }
-          } as AppNode;
-        }
-        return node;
-      });
-    });
-  }, [edges, setEdges, setNodes]);
+  //         return {
+  //           ...node,
+  //           data: {
+  //             ...node.data,
+  //             nextNodeId: null
+  //           }
+  //         } as AppNode;
+  //       }
+  //       return node;
+  //     });
+  //   });
+  // }, [edges, setEdges, setNodes]);
 
   const onConnect: OnConnect = useCallback((params: Connection) => {
     if (hasExistingConnection(params.source, params.sourceHandle, edges)) {
@@ -204,6 +204,7 @@ const DnDFlow = () => {
     [screenToFlowPosition, type, setNodes]
   );
   console.log(edges);
+  console.log(nodes);
   return (
     <div className="dndflow">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>

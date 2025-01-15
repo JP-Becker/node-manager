@@ -39,7 +39,11 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
         <button>expand</button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Left} />
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
       <input
@@ -80,7 +84,11 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
           background: 'transparent'
         }}
       />
-      <Handle type="source" position={Position.Right} />
+      <Handle 
+        type="source" 
+        position={Position.Right} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
     </div>
   );
 }

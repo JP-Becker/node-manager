@@ -76,3 +76,22 @@ body {
     max-width: 250px;
   }
 }
+ 
+.edgebutton-foreignobject {
+  opacity: 1;
+  /* transition: opacity 0.2s; */
+  /* pointer-events: all; */
+}
+ 
+/* .edgebutton-foreignobject:hover {
+  opacity: 0.5;
+}
+ 
+.react-flow__edge:hover .edgebutton-foreignobject {
+  opacity: 0.5;
+}
+  */
+.edgebutton-foreignobject div:hover {
+  background: #f00;
+  color: red;
+}

@@ -67,7 +67,7 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
         <button>expand</button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Left} />
+      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px', background: '#f5f5f5' }}/>
       
       <div style={{ 
         marginBottom: '4px',

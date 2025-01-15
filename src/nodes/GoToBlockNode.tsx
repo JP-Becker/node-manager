@@ -28,13 +28,17 @@ export function GoToBlockNode({ data }: NodeProps<GoToBlockNodeType>) {
   };
 
   return (
-    <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }}>
+    <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }} >
       <h2>GO TO BLOCK</h2>
       <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
         <button>copy</button>
         <button>expand</button>
       </NodeToolbar>
-      <Handle type="target" position={Position.Left} />
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        style={{ width: '15px', height: '15px' }}
+      />
       <div style={{ marginBottom: '8px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>IR PARA O BLOCO DE:</div>
       <div><p>{handleWichBlockToGo()}</p></div>
       {/* <Handle type="source" position={Position.Right} /> */}
