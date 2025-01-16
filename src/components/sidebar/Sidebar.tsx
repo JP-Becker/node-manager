@@ -129,6 +129,9 @@ export const Sidebar = () => {
       <div className="dndnode quick-reply" onDragStart={(event) => onDragStart(event, 'QUICK_REPLY')} draggable>
         Quick Reply Node
       </div>
+      <div className="dndnode ai-agent" onDragStart={(event) => onDragStart(event, 'AI_AGENT')} draggable>
+        AI Agent Node
+      </div>
 
       <button
         onClick={handleExport}

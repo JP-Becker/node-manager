@@ -9,6 +9,7 @@ import { WebLinkNode } from './WebLinkNode';
 import { ImageNode } from './ImageNode';
 import { QuickReplyNode } from './QuickReplyNode';
 import { GoToBlockNode } from './GoToBlockNode';
+import { AiAgentNode } from './AiAgentNode';
 
 const GO_TO_BLOCK_X = 1800; // posição fixa na direita
 const GO_TO_BLOCK_Y_SPACING = 175;
@@ -161,6 +162,7 @@ export const nodeTypes = {
   IMAGE: ImageNode,
   QUICK_REPLY: QuickReplyNode,
   GO_TO_BLOCK: GoToBlockNode,
+  AI_AGENT: AiAgentNode,
 } satisfies NodeTypes;
 
 export type AvailableNodeTypes = keyof typeof nodeTypes;

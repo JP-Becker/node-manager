@@ -61,10 +61,22 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
       borderRadius: '8px'
     }}>
       <h2>QUICK REPLY</h2>
-      <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
-        <button onClick={handleDelete}>delete</button>
-        <button>copy</button>
-        <button>expand</button>
+      <NodeToolbar 
+        isVisible={data.toolbarVisible} 
+        position={data.toolbarPosition}
+        style={{ display: 'flex', gap: '8px' }}
+      >
+        <button 
+          onClick={handleDelete}
+          className="toolbar-button toolbar-button-delete"
+        >
+          Delete
+        </button>
+        <button 
+          className="toolbar-button toolbar-button-copy"
+        >
+          Copy
+        </button>
       </NodeToolbar>
 
       <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px', background: '#f5f5f5' }}/>

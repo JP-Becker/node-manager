@@ -70,4 +70,15 @@ export type GoToBlockNode = Node<{
 export type OptionNode = Node<MenuOptionData['content'], 'OPTION'>;
 
 export type PositionLoggerNode = Node<{ label: string }, 'position-logger'>;
-export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode | QuickReplyNode | GoToBlockNode;
+
+export type AiAgentNode = Node<{
+    nextNodeId: string | null;
+    content: {
+        endpoint: string;
+        instruction: string;
+        useFallback: boolean;
+        fallbackMessage: string | null;
+    }
+}, 'AI_AGENT'>;
+
+export type AppNode = BuiltInNode | PositionLoggerNode | MenuNode | OptionNode | TextNode | WebLinkNode | ImageNode | QuickReplyNode | GoToBlockNode | AiAgentNode;

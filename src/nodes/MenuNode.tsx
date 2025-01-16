@@ -61,17 +61,23 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
       borderRadius: '8px'
     }}>
       <h2>MENU</h2>
-      <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
-        <button onClick={handleDelete}>delete</button>
-        <button>copy</button>
-        <button>expand</button>
+      <NodeToolbar 
+        isVisible={data.toolbarVisible} 
+        position={data.toolbarPosition}
+        style={{ display: 'flex', gap: '8px' }}
+      >
+        <button 
+          onClick={handleDelete}
+          className="toolbar-button toolbar-button-delete"
+        >
+          Delete
+        </button>
+        <button 
+          className="toolbar-button toolbar-button-copy"
+        >
+          Copy
+        </button>
       </NodeToolbar>
-
-      <Handle 
-        type="target" 
-        position={Position.Left} 
-        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
-      />
       
       <div style={{ 
         marginBottom: '4px',

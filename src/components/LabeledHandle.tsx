@@ -61,40 +61,31 @@ export function LabeledHandle({ id, label, type, position }: LabeledHandleProps)
       justifyContent: position === Position.Right ? 'flex-end' : 'flex-start',
       alignItems: 'center'
     }}>
-      {/* <span style={{ 
-        fontSize: '12px',
-        padding: '4px 8px',
-      }}>
-        {label}
-      </span> */}
       <button 
-      onClick={handleDelete}
-      style={{
-        padding: '2px 8px',
-        fontSize: '12px',
-        background: '#ff4444',
-        color: 'white',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-        marginRight: '8px'
-      }}
-    >
-      x
-    </button>
-    <input
-      value={label}
-      onChange={handleTextChange}
-      maxLength={20}
-      style={{ 
-        width: '100%',
-        marginBottom: '15px',
-        textAlign: 'center',
-        fontSize: '12px',
-        border: '1px solid black',
-        background: 'transparent'
-      }}
-    />
+        onClick={handleDelete}
+        className="toolbar-button toolbar-button-delete"
+        style={{
+          width: 'auto',
+          padding: '2px 8px',
+          fontSize: '12px',
+          marginRight: '8px'
+        }}
+      >
+        x
+      </button>
+      <input
+        value={label}
+        onChange={handleTextChange}
+        maxLength={20}
+        style={{ 
+          width: '100%',
+          marginBottom: '15px',
+          textAlign: 'center',
+          fontSize: '12px',
+          border: '1px solid black',
+          background: 'transparent'
+        }}
+      />
       <Handle
         type={type}
         position={position}

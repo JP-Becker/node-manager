@@ -30,10 +30,6 @@ export function GoToBlockNode({ data }: NodeProps<GoToBlockNodeType>) {
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }} >
       <h2>GO TO BLOCK</h2>
-      <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
-        <button>copy</button>
-        <button>expand</button>
-      </NodeToolbar>
       <Handle 
         type="target" 
         position={Position.Left} 

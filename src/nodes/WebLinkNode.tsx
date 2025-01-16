@@ -33,10 +33,22 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
       <h2>WEB LINK</h2>
-      <NodeToolbar isVisible={data.toolbarVisible} position={data.toolbarPosition}>
-        <button onClick={handleDelete}>delete</button>
-        <button>copy</button>
-        <button>expand</button>
+      <NodeToolbar 
+        isVisible={data.toolbarVisible} 
+        position={data.toolbarPosition}
+        style={{ display: 'flex', gap: '8px' }}
+      >
+        <button 
+          onClick={handleDelete}
+          className="toolbar-button toolbar-button-delete"
+        >
+          Delete
+        </button>
+        <button 
+          className="toolbar-button toolbar-button-copy"
+        >
+          Copy
+        </button>
       </NodeToolbar>
 
       <Handle type="target" position={Position.Left} />

@@ -1,15 +1,16 @@
 import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
-import { ImageNode as ImageNodeType } from './types';
+import { AiAgentNode as AiAgentNodeType } from './types';
+import './index.css';
 
-export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
+export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
-  const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (field: 'endpoint' | 'instruction') => (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
-          const typedNode = node as ImageNodeType;
+          const typedNode = node as AiAgentNodeType;
           return {
             ...node,
             data: {
@@ -32,7 +33,7 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
 
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
-      <h2>NODE DE IMAGEM</h2>
+      <h2>AI AGENT</h2>
       <NodeToolbar 
         isVisible={data.toolbarVisible} 
         position={data.toolbarPosition}
@@ -51,16 +52,12 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
         </button>
       </NodeToolbar>
 
-      <Handle 
-        type="target" 
-        position={Position.Left} 
-        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
-      />
+      <Handle type="target" position={Position.Left} />
 
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
+      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Endpoint:</div>
       <input
-        value={data.content.title}
-        onChange={handleChange('title')}
+        value={data.content.endpoint}
+        onChange={handleChange('endpoint')}
         style={{
           width: '100%',
           marginBottom: '8px',
@@ -70,10 +67,10 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
         }}
       />
 
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Descrição:</div>
+      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Instrução:</div>
       <input
-        value={data.content.text}
-        onChange={handleChange('text')}
+        value={data.content.instruction}
+        onChange={handleChange('instruction')}
         style={{
           width: '100%',
           marginBottom: '8px',
@@ -82,25 +79,7 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
           background: 'transparent'
         }}
       />
-
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL da Imagem:</div>
-      <input
-        value={data.content.url}
-        onChange={handleChange('url')}
-        style={{
-          width: '100%',
-          color: '#0066cc',
-          textAlign: 'center',
-          textDecoration: 'underline',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
-      />
-      <Handle 
-        type="source" 
-        position={Position.Right} 
-        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
-      />
+      <Handle type="source" position={Position.Right} style={{ width: '15px', height: '15px' }}/>
     </div>
   );
 }

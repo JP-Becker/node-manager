@@ -196,6 +196,21 @@ const DnDFlow = () => {
           }
         },
       }
+    } else if (type === 'AI_AGENT') {
+      newNode = {
+        id: getId(),
+        type,
+        position,
+        data: {
+          nextNodeId: null,
+          content: {
+            endpoint: '',
+            instruction: '',
+            useFallback: false,
+            fallbackMessage: null,
+          }
+        },
+      }
     }
   
     setNodes((nds) => nds.concat(newNode));
@@ -221,6 +236,7 @@ const DnDFlow = () => {
           onConnect={onConnect}
           onDrop={onDrop}
           onDragOver={onDragOver}
+          // colorMode="dark"
           fitView
           style={{ backgroundColor: '#F7F9FB' }}
         >
