@@ -65,7 +65,7 @@ export type GoToBlockNode = Node<{
     content: {
         id: string;
     }
-}, 'GO_TO_BLOCK'>;
+}, 'GO_TO_BLOCK'>  & { draggable?: boolean; deletable?: boolean; selectable?: boolean };
 
 export type OptionNode = Node<MenuOptionData['content'], 'OPTION'>;
 

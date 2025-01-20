@@ -43,42 +43,6 @@ const DnDFlow = () => {
     });
   }, []);
 
- 
-  //   const edgeToDelete: Edge | undefined = edges.find(edge => edge.id === edgeId);
-
-  //   // Atualiza o nextNodeId do nó fonte
-  //   setNodes((nds: AppNode[]) => {
-  //     return nds.map((node) => {
-  //       if (node.id === edgeToDelete.source) {
-  //         if (node.type === 'MENU') {
-  //           const menuNode = node as MenuNode;
-  //           return {
-  //             ...menuNode,
-  //             data: {
-  //               ...menuNode.data,
-  //               options: menuNode.data.options.map((option: MenuOptionData) => {
-  //                 if (option.id === edgeToDelete.sourceHandle) {
-  //                   return { ...option, nextNodeId: null };
-  //                 }
-  //                 return option;
-  //               })
-  //             }
-  //           } as AppNode;
-  //         }
-          
-  //         return {
-  //           ...node,
-  //           data: {
-  //             ...node.data,
-  //             nextNodeId: null
-  //           }
-  //         } as AppNode;
-  //       }
-  //       return node;
-  //     });
-  //   });
-  // }, [edges, setEdges, setNodes]);
-
   const onConnect: OnConnect = useCallback((params: Connection) => {
     if (hasExistingConnection(params.source, params.sourceHandle, edges)) {
       alert('Este nó ou opção já possui uma conexão!');
@@ -114,7 +78,8 @@ const DnDFlow = () => {
             }
           } as AppNode;
         }
-        return node;
+
+        
       });
     });
   }, [setEdges, setNodes, edges, hasExistingConnection]);
@@ -218,6 +183,7 @@ const DnDFlow = () => {
   },
     [screenToFlowPosition, type, setNodes]
   );
+
   console.log(edges);
   console.log(nodes);
   return (
@@ -236,7 +202,6 @@ const DnDFlow = () => {
           onConnect={onConnect}
           onDrop={onDrop}
           onDragOver={onDragOver}
-          // colorMode="dark"
           fitView
           style={{ backgroundColor: '#F7F9FB' }}
         >

@@ -1,4 +1,4 @@
-import { Handle, Position, type NodeProps, Node, NodeToolbar } from '@xyflow/react';
+import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { GoToBlockNode as GoToBlockNodeType } from './types';
 
 export function GoToBlockNode({ data }: NodeProps<GoToBlockNodeType>) {
@@ -28,7 +28,7 @@ export function GoToBlockNode({ data }: NodeProps<GoToBlockNodeType>) {
   };
 
   return (
-    <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }} >
+    <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }} draggable={data.draggable ?? false} >
       <h2>GO TO BLOCK</h2>
       <Handle 
         type="target" 

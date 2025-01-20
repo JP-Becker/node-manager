@@ -59,7 +59,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: 'd506f400-22cf-434d-b31c-2c7b9a988fa7',
       }
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 
   // DIRECTOR
@@ -72,7 +75,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: '329d9c58-bbb8-41d3-9fa1-0a73b736b393',
       },
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 
   // CADASTRO
@@ -85,7 +91,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: '40e3178d-e1be-4f82-b296-73378f7cd53e',
       },
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 
   // HORARIO DE ATENDIMENTO (VALIDAÇÃO DE HORARIO DEPOIS DO CADASTRO)
@@ -97,8 +106,11 @@ export const initialNodes: AppNode[] = [
     nextNodeId: 'ca67b49e-0d75-49e8-9ce3-773b6df2059c',
     content: {
       id: 'd506f400-22cf-434d-b31c-2c7b9a988fa7',
+      },
     },
-  }
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
   // ATENDIMENTO HUMANO
   {
@@ -110,7 +122,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: '252c9326-cffd-430b-b53e-e5cfad89aab8',
       },
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 
   // PESQUISA COM NOTA
@@ -123,7 +138,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: '23bcf87c-2b45-4798-8ea8-5ba095b1f2eb',
       },
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 
   // PESQUISA SEM NOTA
@@ -136,7 +154,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: 'fc452091-218e-4e7f-8344-39c249d470f9',
       },
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 
   // ORIGEM
@@ -149,7 +170,10 @@ export const initialNodes: AppNode[] = [
       content: {
         id: 'e118b07c-10cb-4404-94d4-834f57bc4dde',
       },
-    }
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 ];
 
