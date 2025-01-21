@@ -1,4 +1,4 @@
-import type { NodeTypes } from '@xyflow/react';
+import type { Node, NodeTypes } from '@xyflow/react';
 
 import { PositionLoggerNode } from './PositionLoggerNode';
 import { MenuNode } from './MenuNode';
