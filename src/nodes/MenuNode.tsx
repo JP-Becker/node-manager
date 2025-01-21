@@ -54,6 +54,8 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
     deleteElements({ nodes: [{ id }] });
   };
 
+  
+
   return (
     <div className="react-flow__node-default" style={{ 
       minWidth: '250px',
@@ -74,11 +76,14 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
         </button>
         <button 
           className="toolbar-button toolbar-button-copy"
+          // onClick={handleDuplicate}
         >
           Copy
         </button>
       </NodeToolbar>
       
+      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px', background: '#f5f5f5' }}/>
+
       <div style={{ 
         marginBottom: '4px',
         color: '#555',

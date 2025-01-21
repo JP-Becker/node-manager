@@ -28,6 +28,15 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
   const handleDelete = () => {
     deleteElements({ nodes: [{ id }] });
   };
+
+  const handleDuplicate = () => {
+    const newNode = {
+      ...data,
+      id: crypto.randomUUID(), // Gerando um novo ID para o nó duplicado
+      position: { x: data.position.x + 20, y: data.position.y + 20 }, // Ajustando a posição para não sobrepor
+    };
+    setNodes((nodes: Node[]) => nodes.concat(newNode)); // Adicionando o nó duplicado
+  };
   
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px', minHeight: '100px' }}>
@@ -44,6 +53,7 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
           Delete
         </button>
         <button 
+          onClick={handleDuplicate}
           className="toolbar-button toolbar-button-copy"
         >
           Copy

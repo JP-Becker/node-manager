@@ -9,8 +9,6 @@ import {
   useReactFlow,
   MiniMap,
   addEdge,
-  useNodesState,
-  useEdgesState,
   type OnConnect,
   Connection,
   Edge,
@@ -55,6 +53,14 @@ const DnDFlow = () => {
       return;
     }
 
+    const newEdge = {
+      id: getId(), // Gera um ID único para o novo edge
+      source: params.source,
+      target: params.target,
+      sourceHandle: params.sourceHandle,
+      targetHandle: params.targetHandle,
+  };
+
     setState(
       (els) => ({
         nodes: els.nodes.map((node: AppNode) => {
@@ -86,7 +92,7 @@ const DnDFlow = () => {
 
           return node;
         }),
-        edges: els.edges.concat(addEdge(params, els.edges))
+        edges: els.edges.concat(newEdge)
       })
     );
   }, [setState, state.nodes, state.edges, hasExistingConnection]);
