@@ -31,7 +31,7 @@ export type WebLinkNode = Node<
 
 export type TextNode = Node<
     {
-        position: { x: number, y: number },
+        position?: { x: number, y: number },
         nextNodeId: string | null;
         content: {
             text: string;

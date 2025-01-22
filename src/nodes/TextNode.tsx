@@ -1,7 +1,7 @@
 import { Handle, Position, useReactFlow, type NodeProps, Node, NodeToolbar } from '@xyflow/react';
 import { TextNode as TextNodeType } from './types';
 
-export function TextNode({ data, id }: NodeProps<TextNodeType>) {
+export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,13 +29,23 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
     deleteElements({ nodes: [{ id }] });
   };
 
+  console.log(position);
+
   const handleDuplicate = () => {
+
     const newNode = {
-      ...data,
-      id: crypto.randomUUID(), // Gerando um novo ID para o nó duplicado
-      position: { x: data.position.x + 20, y: data.position.y + 20 }, // Ajustando a posição para não sobrepor
-    };
-    setNodes((nodes: Node[]) => nodes.concat(newNode)); // Adicionando o nó duplicado
+      id: crypto.randomUUID(),
+      type: 'TEXT',
+      position: { x: 20, y: 20 },
+      data: {
+        nextNodeId: null,
+        content: {
+          text: data.content.text,
+        }
+      },
+    }
+
+    setNodes((nodes: Node[]) => [...nodes, newNode]);
   };
   
   return (
@@ -50,13 +60,13 @@ export function TextNode({ data, id }: NodeProps<TextNodeType>) {
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
         >
-          Delete
+          Deletar
         </button>
         <button 
           onClick={handleDuplicate}
           className="toolbar-button toolbar-button-copy"
         >
-          Copy
+          Duplicar
         </button>
       </NodeToolbar>
       <Handle 

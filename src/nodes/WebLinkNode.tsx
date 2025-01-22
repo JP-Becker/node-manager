@@ -30,6 +30,24 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
     deleteElements({ nodes: [{ id }] });
   };
 
+  const handleDuplicate = () => {
+    const newNode = {
+      id: getId(),
+      type: 'WEBLINK',
+      position: { x: 20, y: 20 },
+      data: {
+        nextNodeId: null,
+        content: {
+          url: '',
+          title: '',
+          text: '',
+        }
+      },
+    }
+
+    setNodes((nodes: Node[]) => [...nodes, newNode]);
+  };
+
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
       <h2>WEB LINK</h2>

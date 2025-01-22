@@ -219,6 +219,7 @@ const DnDFlow = () => {
     );
   };
 
+  console.log(state.nodes);
   return (
     <div className="dndflow dark">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>
