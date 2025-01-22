@@ -31,6 +31,25 @@ export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
     deleteElements({ nodes: [{ id }] });
   };
 
+  const handleDuplicate = () => {
+    const newNode = {
+      id: crypto.randomUUID(),
+      type: 'AI_AGENT',
+      position: { x: 20, y: 20 },
+      data: {
+        nextNodeId: null,
+        content: {
+          endpoint: data.content.endpoint,
+          instruction: data.content.instruction,
+          useFallback: data.content.useFallback,
+          fallbackMessage: data.content.fallbackMessage,
+        }
+      },
+    }
+
+    setNodes((nodes) => [...nodes, newNode]);
+  };
+
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
       <h2>AI AGENT</h2>
@@ -43,12 +62,13 @@ export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
         >
-          Delete
+          Deletar
         </button>
         <button 
+          onClick={handleDuplicate}
           className="toolbar-button toolbar-button-copy"
         >
-          Copy
+          Duplicar
         </button>
       </NodeToolbar>
 

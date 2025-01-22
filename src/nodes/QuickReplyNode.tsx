@@ -54,6 +54,23 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
     deleteElements({ nodes: [{ id }] });
   };
 
+  const handleDuplicate = () => {
+    const newNode = {
+      id: crypto.randomUUID(),
+      type: 'QUICK_REPLY',
+      position: { x: 50, y: 50 },
+      data: {
+        text: data.text,
+        options: data.options.map((option) => ({
+          ...option,
+          id: crypto.randomUUID(),
+        }))
+      },
+    }
+
+    setNodes((nodes) => [...nodes, newNode]);
+  };
+
   return (
     <div className="react-flow__node-default" style={{ 
       minWidth: '250px',
@@ -70,12 +87,13 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
         >
-          Delete
+          Deletar
         </button>
         <button 
           className="toolbar-button toolbar-button-copy"
+          onClick={handleDuplicate}
         >
-          Copy
+          Duplicar
         </button>
       </NodeToolbar>
 

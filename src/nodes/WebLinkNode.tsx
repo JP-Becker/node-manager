@@ -32,20 +32,20 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
 
   const handleDuplicate = () => {
     const newNode = {
-      id: getId(),
+      id: crypto.randomUUID(),
       type: 'WEBLINK',
       position: { x: 20, y: 20 },
       data: {
         nextNodeId: null,
         content: {
-          url: '',
-          title: '',
-          text: '',
+          url: data.content.url,
+          title: data.content.title,
+          text: data.content.text,
         }
       },
     }
 
-    setNodes((nodes: Node[]) => [...nodes, newNode]);
+    setNodes((nodes) => [...nodes, newNode]);
   };
 
   return (
@@ -60,12 +60,13 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
         >
-          Delete
+          Deletar
         </button>
         <button 
+          onClick={handleDuplicate}
           className="toolbar-button toolbar-button-copy"
         >
-          Copy
+          Duplicar
         </button>
       </NodeToolbar>
 

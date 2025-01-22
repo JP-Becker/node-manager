@@ -30,6 +30,24 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
     deleteElements({ nodes: [{ id }] });
   };
 
+  const handleDuplicate = () => {
+    const newNode = {
+      id: crypto.randomUUID(),
+      type: 'IMAGE',
+      position: { x: 20, y: 20 },
+      data: {
+        nextNodeId: null,
+        content: {
+          url: data.content.url,
+          title: data.content.title,
+          text: data.content.text,
+        }
+      },
+    }
+
+    setNodes((nodes) => [...nodes, newNode]);
+  };
+
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
       <h2>NODE DE IMAGEM</h2>
@@ -42,12 +60,13 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
         >
-          Delete
+          Deletar
         </button>
         <button 
+          onClick={handleDuplicate}
           className="toolbar-button toolbar-button-copy"
         >
-          Copy
+          Duplicar
         </button>
       </NodeToolbar>
 

@@ -54,7 +54,22 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
     deleteElements({ nodes: [{ id }] });
   };
 
-  
+  const handleDuplicate = () => {
+    const newNode = {
+      id: crypto.randomUUID(),
+      type: 'MENU',
+      position: { x: 50, y: 50 },
+      data: {
+        text: data.text,
+        options: data.options.map((option) => ({
+          ...option,
+          id: crypto.randomUUID(),
+        }))
+      },
+    }
+
+    setNodes((nodes) => [...nodes, newNode]);
+  };
 
   return (
     <div className="react-flow__node-default" style={{ 
@@ -72,13 +87,13 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
         >
-          Delete
+          Deletar
         </button>
         <button 
           className="toolbar-button toolbar-button-copy"
-          // onClick={handleDuplicate}
+          onClick={handleDuplicate}  
         >
-          Copy
+          Duplicar
         </button>
       </NodeToolbar>
       

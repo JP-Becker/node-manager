@@ -19,6 +19,7 @@ export interface MenuOptionData {
 
 export type WebLinkNode = Node<
     {
+        position?: { x: number, y: number };
         nextNodeId: string | null;
         content: {
             url: string;
@@ -31,7 +32,7 @@ export type WebLinkNode = Node<
 
 export type TextNode = Node<
     {
-        position?: { x: number, y: number },
+        position?: { x: number, y: number };
         nextNodeId: string | null;
         content: {
             text: string;
