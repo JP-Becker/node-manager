@@ -112,7 +112,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <aside>
+    <aside style={{ position: 'fixed', top: '0', left: '0', width: '200px', height: '100vh', backgroundColor: '#f0f0f0' }}>
       <div className="description">Clique e arraste o nó desejado.</div>
       <div className="dndnode menu" onDragStart={(event) => onDragStart(event, 'MENU')} draggable>
         Menu Node

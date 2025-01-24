@@ -219,6 +219,15 @@ const DnDFlow = () => {
     );
   };
 
+  const resetNodes = () => {
+    setState(
+      (els) => ({
+        nodes: initialNodes,
+        edges: initialEdges
+      })
+    );
+  }
+
   console.log(state.nodes);
   return (
     <div className="dndflow dark">
@@ -241,12 +250,12 @@ const DnDFlow = () => {
           className="react-flow-dark"
           style={{ backgroundColor: '#ffffff' }}
         >
-          <Controls />
+          <Controls position='top-right'/>
           <Background color="#333" variant={BackgroundVariant.Dots} gap={12} size={1} />
           <MiniMap />
           <div style={{
-            position: 'absolute',
-            left: 10,
+            position: 'fixed',
+            right: 50,
             top: 10,
             zIndex: 4,
           }}>
@@ -258,9 +267,22 @@ const DnDFlow = () => {
                 background: '#4a4a4a',
                 color: 'white',
                 width: 'auto',
+                padding: '2px 8px', 
               }}
             >
               Desfazer
+            </button>
+            <button
+              onClick={resetNodes}
+              className="toolbar-button"
+              style={{
+                background: '#4a4a4a',
+                color: 'white',
+                width: 'auto',
+                padding: '2px 8px', 
+              }}
+            >
+              Resetar fluxo
             </button>
           </div>
         </ReactFlow>
