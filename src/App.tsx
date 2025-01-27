@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useUndoable from 'use-undoable';
 import {
@@ -28,10 +28,13 @@ import { AppNode, MenuNode, MenuOptionData } from './nodes/types';
 const getId = () => uuidv4();
 
 const DnDFlow = () => {
+  const savedNodes = JSON.parse(localStorage.getItem('nodes') || '[]');
+  const savedEdges = JSON.parse(localStorage.getItem('edges') || '[]');
+
   const reactFlowWrapper = useRef(null);
   const [state, setState, { undo, canUndo }] = useUndoable({
-    nodes: initialNodes,
-    edges: initialEdges
+    nodes: savedNodes.length > 0 ? savedNodes : initialNodes,
+    edges: savedEdges.length > 0 ? savedEdges : initialEdges
   });
   const { screenToFlowPosition } = useReactFlow();
   const [type] = useDnD();
@@ -226,7 +229,13 @@ const DnDFlow = () => {
         edges: initialEdges
       })
     );
-  }
+  };
+
+  useEffect(() => {
+    // Salvar o estado no local storage sempre que ele mudar
+    localStorage.setItem('nodes', JSON.stringify(state.nodes));
+    localStorage.setItem('edges', JSON.stringify(state.edges));
+  }, [state.nodes, state.edges]); 
 
   console.log(state.nodes);
   return (
