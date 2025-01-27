@@ -83,6 +83,18 @@ export const Sidebar = () => {
             },
           };
 
+          case 'AI_AGENT':
+          return {
+            ...baseNode,
+            nextNodeId: node.data.nextNodeId,
+            content: {
+              endpoint: node.data.content.endpoint,
+              instruction: node.data.content.instruction,
+              useFallback: node.data.content.useFallback,
+              fallbackMessage: node.data.content.fallbackMessage,
+            },
+          };
+
         default:
           return baseNode;
       }
