@@ -6,7 +6,7 @@ import { useReactFlow } from '@xyflow/react';
 
 export const Sidebar = () => {
   const [_, setType] = useDnD();
-  const { getNodes } = useReactFlow();
+  const { getNodes, getEdges } = useReactFlow();
 
   const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: AvailableNodeTypes) => {
     setType(nodeType);
@@ -123,6 +123,26 @@ export const Sidebar = () => {
     URL.revokeObjectURL(url);
   };
 
+  const handleExportReactFlowFormat = () => {
+    const nodes = getNodes();
+    const edges = getEdges();
+
+    const jsonData = JSON.stringify({ nodes, edges }, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'nodes-export.json';
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+
   return (
     <aside style={{ position: 'fixed', top: '0', left: '0', width: '200px', height: '100vh', backgroundColor: '#f0f0f0' }}>
       <div className="description">Clique e arraste o nó desejado.</div>
@@ -159,8 +179,26 @@ export const Sidebar = () => {
           fontSize: '12px',
         }}
       >
-        Exportar Nodes
+        Exportar Nodes no formato blip
+      </button>
+
+      <button
+        onClick={handleExportReactFlowFormat}
+        style={{
+          width: '100%',
+          padding: '8px',
+          marginTop: '10px',
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '12px',
+        }}
+      >
+        Exportar Nodes e Edges no formato React Flow
       </button>
     </aside>
   );
 };
+
