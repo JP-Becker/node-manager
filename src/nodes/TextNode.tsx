@@ -83,22 +83,23 @@ export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
       <textarea
           value={data.content.text || ''}
           onChange={handleTextChange}
-          style={{ 
-            width: '100%',
-            marginBottom: '15px',
-            textAlign: 'center',
-            fontSize: '12px',
-            border: '1px solid black',
-            background: 'transparent',
-            resize: 'none',         
-            overflow: 'hidden',       
-            minHeight: '100px',       
-            lineHeight: '1.2',       
-            padding: '4px',          
-            height: 'auto',          
-            boxSizing: 'border-box'
-          }}
-          rows={1}                  
+          className='node-textarea'
+          // style={{ 
+          //   width: '100%',
+          //   marginBottom: '15px',
+          //   textAlign: 'center',
+          //   fontSize: '12px',
+          //   border: '1px solid black',
+          //   background: 'transparent',
+          //   resize: 'none',         
+          //   overflow: 'hidden',       
+          //   minHeight: '100px',       
+          //   lineHeight: '1.2',       
+          //   padding: '4px',          
+          //   height: 'auto',          
+          //   boxSizing: 'border-box'
+          // }}
+          // rows={1}                  
         />
       </div>
       <Handle 

@@ -4,8 +4,8 @@ import { ImageNode as ImageNodeType } from './types';
 export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
-  const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
+  const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = event.target.value;          
     setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
@@ -77,43 +77,24 @@ export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
-      <input
+      <textarea
         value={data.content.title}
         onChange={handleChange('title')}
-        style={{
-          width: '100%',
-          marginBottom: '8px',
-          textAlign: 'center',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-textarea'
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Descrição:</div>
-      <input
+      <textarea
         value={data.content.text}
         onChange={handleChange('text')}
-        style={{
-          width: '100%',
-          marginBottom: '8px',
-          textAlign: 'center',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-textarea'
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL da Imagem:</div>
-      <input
+      <textarea
         value={data.content.url}
         onChange={handleChange('url')}
-        style={{
-          width: '100%',
-          color: '#0066cc',
-          textAlign: 'center',
-          textDecoration: 'underline',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-textarea'
       />
       <Handle 
         type="source" 

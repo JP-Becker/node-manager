@@ -5,7 +5,7 @@ import { LabeledHandle } from '../components/LabeledHandle';
 export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps) {
   const { setNodes, deleteElements } = useReactFlow();
 
-  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = event.target.value;
     setNodes((nodes: Node[]) => 
       nodes.map((node: Node) => {
@@ -114,18 +114,11 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
         textAlign: 'center',
         fontSize: '12px',
       }}>
-        <input
+        <textarea
         value={data.text}
         onChange={handleTextChange}
         maxLength={1024}
-        style={{ 
-          width: '100%',
-          marginBottom: '15px',
-          textAlign: 'center',
-          fontSize: '12px',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-textarea'
       />
       </div>
 

@@ -70,20 +70,13 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
         </button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Left} />
+      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px' }}/>
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
       <textarea
         value={data.content.title}
         onChange={handleChange('title')}
-        className='normal-input'
-        // style={{
-        //   width: '100%',
-        //   marginBottom: '8px',
-        //   textAlign: 'center',
-        //   border: '1px solid black',
-        //   background: 'transparent'
-        // }}
+        className='normal-textarea'
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Descrição:</div>
@@ -91,27 +84,13 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
         value={data.content.text}
         onChange={handleChange('text')}
         className='normal-textarea'
-        // style={{
-        //   width: '100%',
-        //   marginBottom: '8px',
-        //   textAlign: 'center',
-        //   border: '1px solid black',
-        //   background: 'transparent'
-        // }}
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL:</div>
-      <input
+      <textarea
         value={data.content.url}
         onChange={handleChange('url')}
-        style={{
-          width: '100%',
-          color: '#0066cc',
-          textAlign: 'center',
-          textDecoration: 'underline',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-textarea'
       />
       <Handle type="source" position={Position.Right} style={{ width: '15px', height: '15px' }}/>
     </div>
