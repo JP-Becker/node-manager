@@ -26,7 +26,11 @@ export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
   };
 
   const handleDelete = () => {
-    deleteElements({ nodes: [{ id }] });
+    const confirmDelete = confirm('Tem certeza que deseja deletar o node?')
+    
+    if (confirmDelete) {
+      deleteElements({ nodes: [{ id }] });
+    }
   };
 
   console.log(position);

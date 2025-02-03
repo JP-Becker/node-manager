@@ -4,7 +4,7 @@ import { WebLinkNode as WebLinkNodeType } from './types';
 export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
-  const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = event.target.value;
     setNodes((nodes) =>
       nodes.map((node) => {
@@ -73,29 +73,31 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
       <Handle type="target" position={Position.Left} />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
-      <input
+      <textarea
         value={data.content.title}
         onChange={handleChange('title')}
-        style={{
-          width: '100%',
-          marginBottom: '8px',
-          textAlign: 'center',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-input'
+        // style={{
+        //   width: '100%',
+        //   marginBottom: '8px',
+        //   textAlign: 'center',
+        //   border: '1px solid black',
+        //   background: 'transparent'
+        // }}
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Descrição:</div>
-      <input
+      <textarea
         value={data.content.text}
         onChange={handleChange('text')}
-        style={{
-          width: '100%',
-          marginBottom: '8px',
-          textAlign: 'center',
-          border: '1px solid black',
-          background: 'transparent'
-        }}
+        className='normal-textarea'
+        // style={{
+        //   width: '100%',
+        //   marginBottom: '8px',
+        //   textAlign: 'center',
+        //   border: '1px solid black',
+        //   background: 'transparent'
+        // }}
       />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL:</div>

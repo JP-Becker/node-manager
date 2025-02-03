@@ -258,6 +258,7 @@ const DnDFlow = () => {
           proOptions={{ hideAttribution: true }}
           className="react-flow-dark"
           style={{ backgroundColor: '#ffffff' }}
+          // colorMode='dark'
         >
           <Controls position='top-right'/>
           <Background color="#333" variant={BackgroundVariant.Dots} gap={12} size={1} />

@@ -117,6 +117,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
         <input
         value={data.text}
         onChange={handleTextChange}
+        maxLength={1024}
         style={{ 
           width: '100%',
           marginBottom: '15px',
