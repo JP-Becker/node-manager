@@ -63,6 +63,7 @@ export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
         <button 
           onClick={handleDelete}
           className="toolbar-button toolbar-button-delete"
+          
         >
           Deletar
         </button>

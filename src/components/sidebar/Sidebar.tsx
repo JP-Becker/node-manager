@@ -6,7 +6,7 @@ import { useReactFlow } from '@xyflow/react';
 
 export const Sidebar = () => {
   const [_, setType] = useDnD();
-  const { getNodes, getEdges } = useReactFlow();
+  const { getNodes, getEdges, setNodes, setEdges } = useReactFlow();
 
   const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: AvailableNodeTypes) => {
     setType(nodeType);
@@ -114,7 +114,7 @@ export const Sidebar = () => {
 
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'nodes-export.json';
+    link.download = 'nodes-export-blip.json';
 
     document.body.appendChild(link);
     link.click();
@@ -133,7 +133,7 @@ export const Sidebar = () => {
 
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'nodes-export.json';
+    link.download = 'nodes-export-reactflow.json';
 
     document.body.appendChild(link);
     link.click();
@@ -141,6 +141,29 @@ export const Sidebar = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
+
+  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const json = JSON.parse(e.target?.result as string);
+        console.log('Imported JSON:', json); // Log the imported JSON
+        if (json.nodes && json.edges) {
+          setNodes(json.nodes);
+          setEdges(json.edges);
+          console.log('Nodes and edges set successfully');
+        } else {
+          console.error('Invalid JSON structure');
+        }
+      } catch (error) {
+        console.error('Failed to import nodes and edges:', error);
+      }
+    };
+    reader.readAsText(file);
+  };
 
 
   return (
@@ -198,6 +221,23 @@ export const Sidebar = () => {
       >
         Exportar Nodes e Edges no formato React Flow
       </button>
+
+      <input
+        type="file"
+        accept=".json"
+        onChange={handleImport}
+        style={{
+          width: '100%',
+          padding: '8px',
+          marginTop: '10px',
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '12px',
+        }}
+      />
     </aside>
   );
 };

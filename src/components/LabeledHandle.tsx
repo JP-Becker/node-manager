@@ -17,7 +17,7 @@ export function LabeledHandle({ id, label, type, position }: LabeledHandleProps)
       nodes.map((node) => {
         // Procura o nó pai (MenuNode) que contém a opção
         const menuNode = node as Node<MenuNodeType>;
-        if (menuNode.type === 'MENU' && menuNode.data.options?.some((option: { id: string })   => option.id === id)) {
+        if (menuNode.type === 'MENU'|| menuNode.type === 'QUICK_REPLY' && menuNode.data.options?.some((option: { id: string })   => option.id === id)) {
           return {
             ...menuNode,
             data: {
@@ -39,7 +39,7 @@ export function LabeledHandle({ id, label, type, position }: LabeledHandleProps)
     setNodes((nodes) => 
       nodes.map((node) => {
         const menuNode = node as Node<MenuNodeType>;
-        if (menuNode.type === 'MENU' && menuNode.data.options?.some((option: { id: string }) => option.id === id)) {
+        if (menuNode.type === 'MENU' || menuNode.type === 'QUICK_REPLY' && menuNode.data.options?.some((option: { id: string }) => option.id === id)) {
           return {
             ...menuNode,
             data: {
