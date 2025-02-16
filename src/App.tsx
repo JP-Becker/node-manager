@@ -237,6 +237,30 @@ const DnDFlow = () => {
     localStorage.setItem('edges', JSON.stringify(state.edges));
   }, [state.nodes, state.edges]); 
 
+  const handleImport = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const json = JSON.parse(e.target?.result as string);
+        if (json.nodes && json.edges) {
+          setState(() => ({
+            nodes: json.nodes,
+            edges: json.edges
+          }));
+          console.log('Nodes and edges imported successfully');
+        } else {
+          console.error('Invalid JSON structure');
+        }
+      } catch (error) {
+        console.error('Failed to import nodes and edges:', error);
+      }
+    };
+    reader.readAsText(file);
+  }, [setState]);
+
   console.log(state.nodes);
   return (
     <div className="dndflow dark">
@@ -297,7 +321,7 @@ const DnDFlow = () => {
           </div>
         </ReactFlow>
       </div>
-      <Sidebar />
+      <Sidebar onImport={handleImport}/>
     </div>
   );
 };

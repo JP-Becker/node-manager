@@ -4,7 +4,11 @@ import { useDnD } from './DnDContext';
 import { AvailableNodeTypes } from '../../nodes';
 import { useReactFlow } from '@xyflow/react';
 
-export const Sidebar = () => {
+interface SidebarProps {
+  onImport: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const Sidebar = ({ onImport }: SidebarProps) => {
   const [_, setType] = useDnD();
   const { getNodes, getEdges, setNodes, setEdges } = useReactFlow();
 
@@ -142,28 +146,28 @@ export const Sidebar = () => {
     URL.revokeObjectURL(url);
   }
 
-  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  // const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const json = JSON.parse(e.target?.result as string);
-        console.log('Imported JSON:', json); // Log the imported JSON
-        if (json.nodes && json.edges) {
-          setNodes(json.nodes);
-          setEdges(json.edges);
-          console.log('Nodes and edges set successfully');
-        } else {
-          console.error('Invalid JSON structure');
-        }
-      } catch (error) {
-        console.error('Failed to import nodes and edges:', error);
-      }
-    };
-    reader.readAsText(file);
-  };
+  //   const reader = new FileReader();
+  //   reader.onload = (e) => {
+  //     try {
+  //       const json = JSON.parse(e.target?.result as string);
+  //       console.log('Imported JSON:', json); // Log the imported JSON
+  //       if (json.nodes && json.edges) {
+  //         setNodes(json.nodes);
+  //         setEdges(json.edges);
+  //         console.log('Nodes and edges set successfully');
+  //       } else {
+  //         console.error('Invalid JSON structure');
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to import nodes and edges:', error);
+  //     }
+  //   };
+  //   reader.readAsText(file);
+  // };
 
 
   return (
@@ -225,7 +229,7 @@ export const Sidebar = () => {
       <input
         type="file"
         accept=".json"
-        onChange={handleImport}
+        onChange={onImport}
         style={{
           width: '100%',
           padding: '8px',
