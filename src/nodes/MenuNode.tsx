@@ -1,6 +1,7 @@
 import { Handle, Position, type NodeProps, useReactFlow, Node, NodeToolbar, NodeToolbarProps } from '@xyflow/react';
 import { MenuNode as MenuNodeType } from './types';
 import { LabeledHandle } from '../components/LabeledHandle';
+import { getRandomOffset } from '../components/functions/getRandomOffset';
 
 export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps) {
   const { setNodes, deleteElements } = useReactFlow();
@@ -58,7 +59,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
     const newNode = {
       id: crypto.randomUUID(),
       type: 'MENU',
-      position: { x: 50, y: 50 },
+      position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         text: data.text,
         options: data.options.map((option) => ({

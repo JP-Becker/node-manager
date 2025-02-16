@@ -226,13 +226,12 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
         Exportar Nodes e Edges no formato React Flow
       </button>
 
-      <input
+        <input
         type="file"
         accept=".json"
         onChange={onImport}
         style={{
-          width: '100%',
-          padding: '8px',
+          padding: '0',
           marginTop: '10px',
           backgroundColor: '#4CAF50',
           color: 'white',
@@ -240,8 +239,9 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
           borderRadius: '4px',
           cursor: 'pointer',
           fontSize: '12px',
+          maxWidth: '90%',
         }}
-      />
+      />    
     </aside>
   );
 };

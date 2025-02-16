@@ -1,6 +1,7 @@
 import { Handle, Position, type NodeProps, useReactFlow, Node, NodeToolbar, NodeToolbarProps } from '@xyflow/react';
 import { QuickReplyNode as QuickReplyNodeType } from './types';
 import { LabeledHandle } from '../components/LabeledHandle';
+import { getRandomOffset } from '../components/functions/getRandomOffset';
 
 export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & NodeToolbarProps) {
   const { setNodes, deleteElements } = useReactFlow();
@@ -58,7 +59,7 @@ export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & Node
     const newNode = {
       id: crypto.randomUUID(),
       type: 'QUICK_REPLY',
-      position: { x: 50, y: 50 },
+      position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         text: data.text,
         options: data.options.map((option) => ({

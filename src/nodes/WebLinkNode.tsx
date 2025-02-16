@@ -1,5 +1,6 @@
 import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
 import { WebLinkNode as WebLinkNodeType } from './types';
+import { getRandomOffset } from '../components/functions/getRandomOffset';
 
 export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
@@ -34,7 +35,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
     const newNode = {
       id: crypto.randomUUID(),
       type: 'WEBLINK',
-      position: { x: 20, y: 20 },
+      position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         nextNodeId: null,
         content: {

@@ -1,7 +1,8 @@
 import { Handle, Position, useReactFlow, type NodeProps, Node, NodeToolbar } from '@xyflow/react';
 import { TextNode as TextNodeType } from './types';
+import { getRandomOffset } from '../components/functions/getRandomOffset';
 
-export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
+export function TextNode({ data, id }: NodeProps<TextNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -32,15 +33,12 @@ export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
       deleteElements({ nodes: [{ id }] });
     }
   };
-
-  console.log(position);
-
   const handleDuplicate = () => {
 
     const newNode = {
       id: crypto.randomUUID(),
       type: 'TEXT',
-      position: { x: 20, y: 20 },
+      position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         nextNodeId: null,
         content: {
@@ -84,23 +82,7 @@ export function TextNode({ data, id, position }: NodeProps<TextNodeType>) {
       <textarea
           value={data.content.text || ''}
           onChange={handleTextChange}
-          className='node-textarea'
-          // style={{ 
-          //   width: '100%',
-          //   marginBottom: '15px',
-          //   textAlign: 'center',
-          //   fontSize: '12px',
-          //   border: '1px solid black',
-          //   background: 'transparent',
-          //   resize: 'none',         
-          //   overflow: 'hidden',       
-          //   minHeight: '100px',       
-          //   lineHeight: '1.2',       
-          //   padding: '4px',          
-          //   height: 'auto',          
-          //   boxSizing: 'border-box'
-          // }}
-          // rows={1}                  
+          className='textnode-textarea'                  
         />
       </div>
       <Handle 

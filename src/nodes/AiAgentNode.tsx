@@ -1,6 +1,7 @@
 import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
 import { AiAgentNode as AiAgentNodeType } from './types';
 import './index.css';
+import { getRandomOffset } from '../components/functions/getRandomOffset';
 
 export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
@@ -35,7 +36,7 @@ export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
     const newNode = {
       id: crypto.randomUUID(),
       type: 'AI_AGENT',
-      position: { x: 20, y: 20 },
+      position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         nextNodeId: null,
         content: {
