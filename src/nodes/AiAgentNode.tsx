@@ -73,7 +73,11 @@ export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
         </button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Left} />
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Endpoint:</div>
       <input
