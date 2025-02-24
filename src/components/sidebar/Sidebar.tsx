@@ -146,32 +146,17 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
     URL.revokeObjectURL(url);
   }
 
-  // const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (!file) return;
-
-  //   const reader = new FileReader();
-  //   reader.onload = (e) => {
-  //     try {
-  //       const json = JSON.parse(e.target?.result as string);
-  //       console.log('Imported JSON:', json); // Log the imported JSON
-  //       if (json.nodes && json.edges) {
-  //         setNodes(json.nodes);
-  //         setEdges(json.edges);
-  //         console.log('Nodes and edges set successfully');
-  //       } else {
-  //         console.error('Invalid JSON structure');
-  //       }
-  //     } catch (error) {
-  //       console.error('Failed to import nodes and edges:', error);
-  //     }
-  //   };
-  //   reader.readAsText(file);
-  // };
-
-
   return (
-    <aside style={{ position: 'fixed', top: '0', left: '0', width: '200px', height: '100vh', backgroundColor: '#f0f0f0' }}>
+    <aside style={{ 
+      position: 'fixed', 
+      top: '0', 
+      left: '0', 
+      width: '200px', 
+      height: '100vh', 
+      backgroundColor: '#f0f0f0',
+      display: 'flex',         // Adicionar display flex
+      flexDirection: 'column', // Organizar elementos verticalmente
+    }}>
       <div className="description">Clique e arraste o nó desejado.</div>
       <div className="dndnode menu" onDragStart={(event) => onDragStart(event, 'MENU')} draggable>
         Menu Node
@@ -192,12 +177,15 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
         AI Agent Node
       </div>
 
+      <div style={{ 
+      flex: '0 0 auto',
+      marginTop: '20px' 
+    }}>
       <button
         onClick={handleExport}
         style={{
           width: '100%',
           padding: '8px',
-          marginTop: '00%',
           backgroundColor: '#4CAF50',
           color: 'white',
           border: 'none',
@@ -206,7 +194,7 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
           fontSize: '12px',
         }}
       >
-        Exportar Nodes no formato blip
+        Exportar Nodes no formato Chatbot Blip
       </button>
 
       <button
@@ -225,24 +213,32 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
       >
         Exportar Nodes e Edges no formato React Flow
       </button>
+    </div>
 
-        <input
+    {/* Import section */}
+    <div style={{marginTop:'auto', marginBottom: '12px', fontSize: '15px'}}>Importar Fluxo (React flow)</div>
+    
+    <div style={{ 
+      // marginTop: 'auto',
+      marginBottom: '20px'  // Add bottom margin to prevent overflow
+    }}>
+      <input
         type="file"
         accept=".json"
         onChange={onImport}
         style={{
-          padding: '0',
-          marginTop: '10px',
-          backgroundColor: '#4CAF50',
+          width: '90%',
+          padding: '8px',
+          backgroundColor: 'green',
           color: 'white',
           border: 'none',
           borderRadius: '4px',
           cursor: 'pointer',
           fontSize: '12px',
-          maxWidth: '90%',
         }}
       />    
-    </aside>
+    </div>
+  </aside>
   );
 };
 

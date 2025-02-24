@@ -314,6 +314,7 @@ const DnDFlow = () => {
                 color: 'white',
                 width: 'auto',
                 padding: '2px 8px', 
+                marginLeft: '4px'
               }}
             >
               Resetar fluxo
