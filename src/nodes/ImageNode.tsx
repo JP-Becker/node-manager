@@ -1,16 +1,16 @@
 import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
-import { WebLinkNode as WebLinkNodeType } from './types';
+import { ImageNode as ImageNodeType } from './types';
 import { getRandomOffset } from '../components/functions/getRandomOffset';
 
-export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
+export function ImageNode({ data, id }: NodeProps<ImageNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
   const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = event.target.value;
+    const newValue = event.target.value;          
     setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
-          const typedNode = node as WebLinkNodeType;
+          const typedNode = node as ImageNodeType;
           return {
             ...node,
             data: {
@@ -34,7 +34,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
   const handleDuplicate = () => {
     const newNode = {
       id: crypto.randomUUID(),
-      type: 'WEBLINK',
+      type: 'IMAGE',
       position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         nextNodeId: null,
@@ -51,7 +51,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
 
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
-      <h2>WEB LINK</h2>
+      <h2>NODE DE IMAGEM</h2>
       <NodeToolbar 
         isVisible={data.toolbarVisible} 
         position={data.toolbarPosition}
@@ -71,7 +71,11 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
         </button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px' }}/>
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
 
       <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
       <textarea
@@ -87,13 +91,17 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
         className='normal-textarea'
       />
 
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL:</div>
+      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL da Imagem:</div>
       <textarea
         value={data.content.url}
         onChange={handleChange('url')}
         className='normal-textarea'
       />
-      <Handle type="source" position={Position.Right} style={{ width: '15px', height: '15px' }}/>
+      <Handle 
+        type="source" 
+        position={Position.Right} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
+      />
     </div>
   );
 }

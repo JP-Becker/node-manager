@@ -1,9 +1,9 @@
 import { Handle, Position, type NodeProps, useReactFlow, Node, NodeToolbar, NodeToolbarProps } from '@xyflow/react';
-import { MenuNode as MenuNodeType } from './types';
+import { QuickReplyNode as QuickReplyNodeType } from './types';
 import { LabeledHandle } from '../components/LabeledHandle';
 import { getRandomOffset } from '../components/functions/getRandomOffset';
 
-export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps) {
+export function QuickReplyNode({ data, id}: NodeProps<QuickReplyNodeType> & NodeToolbarProps) {
   const { setNodes, deleteElements } = useReactFlow();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -58,7 +58,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
   const handleDuplicate = () => {
     const newNode = {
       id: crypto.randomUUID(),
-      type: 'MENU',
+      type: 'QUICK_REPLY',
       position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         text: data.text,
@@ -78,7 +78,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
       padding: '15px',
       borderRadius: '8px'
     }}>
-      <h2>MENU</h2>
+      <h2>QUICK REPLY</h2>
       <NodeToolbar 
         isVisible={data.toolbarVisible} 
         position={data.toolbarPosition}
@@ -92,14 +92,14 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
         </button>
         <button 
           className="toolbar-button toolbar-button-copy"
-          onClick={handleDuplicate}  
+          onClick={handleDuplicate}
         >
           Duplicar
         </button>
       </NodeToolbar>
-      
-      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px', background: '#f5f5f5' }}/>
 
+      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px', background: '#f5f5f5' }}/>
+      
       <div style={{ 
         marginBottom: '4px',
         color: '#555',
@@ -118,7 +118,7 @@ export function MenuNode({ data, id}: NodeProps<MenuNodeType> & NodeToolbarProps
         <textarea
         value={data.text}
         onChange={handleTextChange}
-        maxLength={1024}
+        maxLength={72} 
         className='normal-textarea'
       />
       </div>

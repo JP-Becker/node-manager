@@ -1,5 +1,6 @@
 import { useRef, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import useUndoable from 'use-undoable';
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -8,10 +9,12 @@ import {
   useReactFlow,
   MiniMap,
   addEdge,
-  useNodesState,
-  useEdgesState,
   type OnConnect,
   Connection,
+  Edge,
+  BackgroundVariant,
+  applyNodeChanges,
+  applyEdgeChanges,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
@@ -20,31 +23,82 @@ import { initialNodes, nodeTypes } from './nodes';
 import { initialEdges, edgeTypes } from './edges';
 import { DnDProvider, useDnD } from './components/sidebar/DnDContext';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { AppNode } from './nodes/types';
+import { AppNode, MenuNode, MenuOptionData } from './nodes/types';
 
 const getId = () => uuidv4();
 
 const DnDFlow = () => {
+  const savedNodes = JSON.parse(localStorage.getItem('nodes') || '[]');
+  const savedEdges = JSON.parse(localStorage.getItem('edges') || '[]');
+
   const reactFlowWrapper = useRef(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [state, setState, { undo, canUndo }] = useUndoable({
+    nodes: savedNodes.length > 0 ? savedNodes : initialNodes,
+    edges: savedEdges.length > 0 ? savedEdges : initialEdges
+  });
   const { screenToFlowPosition } = useReactFlow();
   const [type] = useDnD();
 
-  const onConnect: OnConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), []);
+  const hasExistingConnection = useCallback((sourceId: string, sourceHandle: string | null, edges: Edge[]) => {
+    return edges.some(edge => {
+      if (sourceHandle) {
+        // Para nós MENU, verifica se já existe conexão para aquela opção específica
+        return edge.source === sourceId && edge.sourceHandle === sourceHandle;
+      }
+      // Para outros nós, verifica se já existe qualquer conexão saindo do nó
+      return edge.source === sourceId;
+    });
+  }, []);
 
-  function getNextNodeIds() {
-    const currentNodeIds = nodes.map((node) => node.id);
-    const connectedEdges = edges.filter((edge) => currentNodeIds.includes(edge.source));
-    
-      if (connectedEdges.length > 0) {
-      const lastEdge = connectedEdges[connectedEdges.length - 1];
-      return lastEdge.target;
+  const onConnect: OnConnect = useCallback((params: Connection) => {
+    if (hasExistingConnection(params.source, params.sourceHandle, state.edges)) {
+      alert('Este nó ou opção já possui uma conexão!');
+      return;
     }
-    
-    
-    return null;
-  }
+
+    const newEdge = {
+      id: getId(), // Gera um ID único para o novo edge
+      source: params.source,
+      target: params.target,
+      sourceHandle: params.sourceHandle,
+      targetHandle: params.targetHandle,
+  };
+
+    setState(
+      (els) => ({
+        nodes: els.nodes.map((node: AppNode) => {
+          if (node.id === params.source && node.type === 'MENU') {
+            const menuNode = node as MenuNode;
+            return {
+              ...menuNode,
+              data: {
+                ...menuNode.data,
+                options: menuNode.data.options.map((option: MenuOptionData) => {
+                  if (option.id === params.sourceHandle) {
+                    return { ...option, nextNodeId: params.target };
+                  }
+                  return option;
+                })
+              }
+            } as AppNode;
+          }
+          
+          if (node.id === params.source) {
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                nextNodeId: params.target
+              }
+            } as AppNode;
+          }
+
+          return node;
+        }),
+        edges: els.edges.concat(newEdge)
+      })
+    );
+  }, [setState, state.nodes, state.edges, hasExistingConnection]);
 
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -62,73 +116,162 @@ const DnDFlow = () => {
         y: event.clientY,
       });
       let newNode: AppNode;
-      switch (type) {
-        case 'MENU':
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            data: {
-              text: '',
-              options: [
-                {
-                  id: getId(),
-                  type: 'OPTION',
-                  nextNodeId: getNextNodeIds(),
-                  content: {
-                    name: '',
-                  },
+      if (type === 'MENU' || type === 'QUICK_REPLY') {
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: {
+            text: '',
+            options: [
+              {
+                id: getId(),
+                type: 'OPTION',
+                nextNodeId: null,
+                content: {
+                  name: '',
                 },
-              ],
-            },
-          };
-          break;
-      
-        case 'TEXT':
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            data: {
-              nextNodeId: getNextNodeIds(),
-              content: {
-                text: '',
-              }
-            },
-          };
-          break;
-      
-        case 'WEBLINK':
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            data: {
-              nextNodeId: getNextNodeIds(),
-              content: {
-                url: '',
-                title: '',
-                text: '',
-              }
-            },
-          };
-          break;
+              },
+            ],
+          },
+        }
+      } else if (type === 'TEXT') {
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: {
+            nextNodeId: null,
+            content: {
+              text: '',
+            }
+          },
+        }
+      } else if (type === 'WEBLINK') {
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: {
+            nextNodeId: null,
+            content: {
+              url: '',
+              title: '',
+              text: '',
+            }
+          },
+        }
+      } else if (type === 'IMAGE') {
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: {
+            nextNodeId: null,
+            content: {
+              url: '',
+              title: '',
+              text: '',
+            }
+          },
+        }
+      } else if (type === 'AI_AGENT') {
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: {
+            nextNodeId: null,
+            content: {
+              endpoint: '',
+              instruction: '',
+              useFallback: false,
+              fallbackMessage: null,
+            }
+          },
+        }
       }
-  
-    setNodes((nds) => nds.concat(newNode));
-   
-  },
-    [screenToFlowPosition, type, setNodes]
+    
+      setState(
+        (els) => ({
+          nodes: els.nodes.concat(newNode),
+          edges: els.edges
+        })
+      );
+    },
+    [screenToFlowPosition, type, setState]
   );
-  const nodeASerAlterado = nodes.filter((node) => node.id === getNextNodeIds())
-  console.log(nodes);
+
+  const onNodesChange = (changes: any) => {
+    setState(
+      (els) => ({
+        nodes: applyNodeChanges(changes, els.nodes),
+        edges: els.edges
+      }),
+      undefined,
+      !changes.some((change: any) => change.type === 'position' && change.dragging)
+    );
+  };
+
+  const onEdgesChange = (changes: any) => {
+    setState(
+      (els) => ({
+        nodes: els.nodes,
+        edges: applyEdgeChanges(changes, els.edges)
+      })
+    );
+  };
+
+  const resetNodes = () => {
+    setState(
+      (els) => ({
+        nodes: initialNodes,
+        edges: initialEdges
+      })
+    );
+  };
+
+  useEffect(() => {
+    // Salvar o estado no local storage sempre que ele mudar
+    localStorage.setItem('nodes', JSON.stringify(state.nodes));
+    localStorage.setItem('edges', JSON.stringify(state.edges));
+  }, [state.nodes, state.edges]); 
+
+  const handleImport = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const json = JSON.parse(e.target?.result as string);
+        if (json.nodes && json.edges) {
+          setState(() => ({
+            nodes: json.nodes,
+            edges: json.edges
+          }));
+          console.log('Nodes and edges imported successfully');
+        } else {
+          console.error('Invalid JSON structure');
+        }
+      } catch (error) {
+        console.error('Failed to import nodes and edges:', error);
+      }
+    };
+    reader.readAsText(file);
+  }, [setState]);
+
+  console.log(state.nodes);
   return (
-    <div className="dndflow">
+    <div className="dndflow dark">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>
         <ReactFlow
-          nodes={nodes}
-          edges={edges}
+          nodes={state.nodes}
+          edges={state.edges}
           nodeTypes={nodeTypes}
+          defaultEdgeOptions={{ 
+            type: 'custom'
+          }}
           edgeTypes={edgeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
@@ -136,14 +279,50 @@ const DnDFlow = () => {
           onDrop={onDrop}
           onDragOver={onDragOver}
           fitView
-          style={{ backgroundColor: '#F7F9FB' }}
+          proOptions={{ hideAttribution: true }}
+          className="react-flow-dark"
+          style={{ backgroundColor: '#ffffff' }}
+          // colorMode='dark'
         >
-          <Controls />
-          <Background />
+          <Controls position='top-right'/>
+          <Background color="#333" variant={BackgroundVariant.Dots} gap={12} size={1} />
           <MiniMap />
+          <div style={{
+            position: 'fixed',
+            right: 50,
+            top: 10,
+            zIndex: 4,
+          }}>
+            <button
+              onClick={undo}
+              disabled={!canUndo}
+              className="toolbar-button"
+              style={{
+                background: '#4a4a4a',
+                color: 'white',
+                width: 'auto',
+                padding: '2px 8px', 
+              }}
+            >
+              Desfazer
+            </button>
+            <button
+              onClick={resetNodes}
+              className="toolbar-button"
+              style={{
+                background: '#4a4a4a',
+                color: 'white',
+                width: 'auto',
+                padding: '2px 8px', 
+                marginLeft: '4px'
+              }}
+            >
+              Resetar fluxo
+            </button>
+          </div>
         </ReactFlow>
       </div>
-      <Sidebar />
+      <Sidebar onImport={handleImport}/>
     </div>
   );
 };

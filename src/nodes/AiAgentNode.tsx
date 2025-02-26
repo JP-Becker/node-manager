@@ -1,16 +1,17 @@
 import { Handle, Position, type NodeProps, useReactFlow, NodeToolbar } from '@xyflow/react';
-import { WebLinkNode as WebLinkNodeType } from './types';
+import { AiAgentNode as AiAgentNodeType } from './types';
+import './index.css';
 import { getRandomOffset } from '../components/functions/getRandomOffset';
 
-export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
+export function AiAgentNode({ data, id }: NodeProps<AiAgentNodeType>) {
   const { setNodes, deleteElements } = useReactFlow();
 
-  const handleChange = (field: 'title' | 'text' | 'url') => (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (field: 'endpoint' | 'instruction') => (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
-          const typedNode = node as WebLinkNodeType;
+          const typedNode = node as AiAgentNodeType;
           return {
             ...node,
             data: {
@@ -34,14 +35,15 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
   const handleDuplicate = () => {
     const newNode = {
       id: crypto.randomUUID(),
-      type: 'WEBLINK',
+      type: 'AI_AGENT',
       position: { x: getRandomOffset(), y: getRandomOffset() },
       data: {
         nextNodeId: null,
         content: {
-          url: data.content.url,
-          title: data.content.title,
-          text: data.content.text,
+          endpoint: data.content.endpoint,
+          instruction: data.content.instruction,
+          useFallback: data.content.useFallback,
+          fallbackMessage: data.content.fallbackMessage,
         }
       },
     }
@@ -51,7 +53,7 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
 
   return (
     <div className="react-flow__node-default" style={{ minWidth: '200px' }}>
-      <h2>WEB LINK</h2>
+      <h2>AI AGENT</h2>
       <NodeToolbar 
         isVisible={data.toolbarVisible} 
         position={data.toolbarPosition}
@@ -71,27 +73,36 @@ export function WebLinkNode({ data, id }: NodeProps<WebLinkNodeType>) {
         </button>
       </NodeToolbar>
 
-      <Handle type="target" position={Position.Left} style={{ width: '15px', height: '15px' }}/>
-
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Título:</div>
-      <textarea
-        value={data.content.title}
-        onChange={handleChange('title')}
-        className='normal-textarea'
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        style={{ width: '15px', height: '15px', background: '#f5f5f5' }}
       />
 
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Descrição:</div>
-      <textarea
-        value={data.content.text}
-        onChange={handleChange('text')}
-        className='normal-textarea'
+      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Endpoint:</div>
+      <input
+        value={data.content.endpoint}
+        onChange={handleChange('endpoint')}
+        style={{
+          width: '100%',
+          marginBottom: '8px',
+          textAlign: 'center',
+          border: '1px solid black',
+          background: 'transparent'
+        }}
       />
 
-      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>URL:</div>
-      <textarea
-        value={data.content.url}
-        onChange={handleChange('url')}
-        className='normal-textarea'
+      <div style={{ marginBottom: '4px', color: '#555', fontSize: '12px', fontWeight: 'bold' }}>Instrução:</div>
+      <input
+        value={data.content.instruction}
+        onChange={handleChange('instruction')}
+        style={{
+          width: '100%',
+          marginBottom: '8px',
+          textAlign: 'center',
+          border: '1px solid black',
+          background: 'transparent'
+        }}
       />
       <Handle type="source" position={Position.Right} style={{ width: '15px', height: '15px' }}/>
     </div>

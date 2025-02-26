@@ -1,4 +1,4 @@
-import type { NodeTypes } from '@xyflow/react';
+import type { Node, NodeTypes } from '@xyflow/react';
 
 import { PositionLoggerNode } from './PositionLoggerNode';
 import { MenuNode } from './MenuNode';
@@ -6,6 +6,13 @@ import { OptionNode } from './OptionNode';
 import { TextNode } from './TextNode';
 import { AppNode } from './types';
 import { WebLinkNode } from './WebLinkNode';
+import { ImageNode } from './ImageNode';
+import { QuickReplyNode } from './QuickReplyNode';
+import { GoToBlockNode } from './GoToBlockNode';
+import { AiAgentNode } from './AiAgentNode';
+
+const GO_TO_BLOCK_X = 1800; // posição fixa na direita
+const GO_TO_BLOCK_Y_SPACING = 175;
 
 export const initialNodes: AppNode[] = [
   {
@@ -42,39 +49,144 @@ export const initialNodes: AppNode[] = [
       ],
     },
   },
+  // HORARIO DE ATENDIMENTO (VALIDAÇÃO DE HORARIO ANTES DO CADASTRO)
   {
-    id: '0b734a53-7d4e-4b92-8146-bdbccbeec94b',
-    type: 'TEXT',
-    position: { x: 0, y: 200 },
+    id: '12fadfb8-3f6e-4e8c-86cc-32afa4294d40',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 0 },
     data: {
-      nextNodeId: null,
+      nextNodeId: 'dca0807f-e431-45f6-b25f-d39fd0f71a01',
       content: {
-        text: '🌐 Para acesso ao manual de instalação, acesse o link abaixo:',
+        id: 'd506f400-22cf-434d-b31c-2c7b9a988fa7',
       }
     },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
+
+  // DIRECTOR
   {
-    id: 'f9e1677c-7905-4670-bef2-3d18c162a4f9',
-    type: 'WEBLINK',
-    position: { x: 0, y: 400 },
+    id: 'dca0807f-e431-45f6-b25f-d39fd0f71a01',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 1 },
     data: {
       nextNodeId: null,
       content: {
-        url: 'https://manuais-switches.intelbras.com.br/pt-BR/Dashboard_Redes/tabela.html',
-        title: 'Suporte Redes',
-        text: 'Manuais disponíveis',
-      }
+        id: '329d9c58-bbb8-41d3-9fa1-0a73b736b393',
+      },
     },
-    
+    draggable: false,
+    deletable: false,
+    selectable: false,
+  },
+
+  // CADASTRO
+  {
+    id: 'daf6397a-f659-4586-a6f6-306fe2984a19',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 2 },
+    data: {
+      nextNodeId: '0fda2fc3-b906-404a-bb98-684cad5275dd',
+      content: {
+        id: '40e3178d-e1be-4f82-b296-73378f7cd53e',
+      },
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
+  },
+
+  // HORARIO DE ATENDIMENTO (VALIDAÇÃO DE HORARIO DEPOIS DO CADASTRO)
+  {
+    id: '0fda2fc3-b906-404a-bb98-684cad5275dd',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 3 },
+    data: {
+    nextNodeId: 'ca67b49e-0d75-49e8-9ce3-773b6df2059c',
+    content: {
+      id: 'd506f400-22cf-434d-b31c-2c7b9a988fa7',
+      },
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
+  },
+  // ATENDIMENTO HUMANO
+  {
+    id: 'ca67b49e-0d75-49e8-9ce3-773b6df2059c',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 4 },
+    data: {
+      nextNodeId: null,
+      content: {
+        id: '252c9326-cffd-430b-b53e-e5cfad89aab8',
+      },
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
+  },
+
+  // PESQUISA COM NOTA
+  {
+    id: '40d3f64f-07b9-4a22-ac21-37848a0ad2e4',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 5 },
+    data: {
+      nextNodeId: null,
+      content: {
+        id: '23bcf87c-2b45-4798-8ea8-5ba095b1f2eb',
+      },
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
+  },
+
+  // PESQUISA SEM NOTA
+  {
+    id: '5efb9be7-0b15-4fd0-95f7-6c87605b8fe3',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 6 },
+    data: {
+      nextNodeId: null,
+      content: {
+        id: 'fc452091-218e-4e7f-8344-39c249d470f9',
+      },
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
+  },
+
+  // ORIGEM
+  {
+    id: '7ce2f72d-e69e-42a8-b040-a402e83f7304',
+    type: 'GO_TO_BLOCK',
+    position: { x: GO_TO_BLOCK_X, y: GO_TO_BLOCK_Y_SPACING * 7 },
+    data: {
+      nextNodeId: null,
+      content: {
+        id: 'e118b07c-10cb-4404-94d4-834f57bc4dde',
+      },
+    },
+    draggable: false,
+    deletable: false,
+    selectable: false,
   },
 ];
 
 export const nodeTypes = {
   'position-logger': PositionLoggerNode,
-  'MENU': MenuNode,
-  'OPTION': OptionNode,
-  'TEXT': TextNode,
-  'WEBLINK': WebLinkNode,
+  MENU: MenuNode,
+  OPTION: OptionNode,
+  TEXT: TextNode,
+  WEBLINK: WebLinkNode,
+  IMAGE: ImageNode,
+  QUICK_REPLY: QuickReplyNode,
+  GO_TO_BLOCK: GoToBlockNode,
+  AI_AGENT: AiAgentNode,
 } satisfies NodeTypes;
 
 export type AvailableNodeTypes = keyof typeof nodeTypes;
