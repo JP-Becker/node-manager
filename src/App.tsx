@@ -57,7 +57,7 @@ const DnDFlow = () => {
     }
 
     const newEdge = {
-      id: getId(), // Gera um ID único para o novo edge
+      id: getId(), 
       source: params.source,
       target: params.target,
       sourceHandle: params.sourceHandle,
@@ -261,7 +261,6 @@ const DnDFlow = () => {
     reader.readAsText(file);
   }, [setState]);
 
-  console.log(state.nodes);
   return (
     <div className="dndflow dark">
       <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '100%' }}>

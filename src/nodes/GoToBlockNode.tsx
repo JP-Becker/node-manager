@@ -1,26 +1,26 @@
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { GoToBlockNode as GoToBlockNodeType } from './types';
 
-export function GoToBlockNode({ data }: NodeProps<GoToBlockNodeType>) {
+export function GoToBlockNode({ data, id }: NodeProps<GoToBlockNodeType>) {
 
 
   const handleWichBlockToGo = () => {
-    switch (data.content.id) {
-      case 'd506f400-22cf-434d-b31c-2c7b9a988fa7':
+    switch (id) {
+      case '12fadfb8-3f6e-4e8c-86cc-32afa4294d40':
         return 'HORARIO DE ATENDIMENTO (VALIDAÇÃO DE HORARIO ANTES DO CADASTRO)';
-      case '329d9c58-bbb8-41d3-9fa1-0a73b736b393':
+      case 'dca0807f-e431-45f6-b25f-d39fd0f71a01':
         return 'DIRECTOR';
-      case '40e3178d-e1be-4f82-b296-73378f7cd53e':
+      case 'daf6397a-f659-4586-a6f6-306fe2984a19':
         return 'CADASTRO';
-      case 'd506f400-22cf-434d-b31c-2c7b9a988fa7':
+      case '0fda2fc3-b906-404a-bb98-684cad5275dd':
         return 'HORARIO DE ATENDIMENTO (VALIDAÇÃO DE HORARIO DEPOIS DO CADASTRO)';
-      case '252c9326-cffd-430b-b53e-e5cfad89aab8':
+      case 'ca67b49e-0d75-49e8-9ce3-773b6df2059c':
         return 'ATENDIMENTO HUMANO';
-      case '23bcf87c-2b45-4798-8ea8-5ba095b1f2eb':
+      case '40d3f64f-07b9-4a22-ac21-37848a0ad2e4':
         return 'PESQUISA COM NOTA';
-      case 'fc452091-218e-4e7f-8344-39c249d470f9':
+      case '5efb9be7-0b15-4fd0-95f7-6c87605b8fe3':
         return 'PESQUISA SEM NOTA';
-      case 'e118b07c-10cb-4404-94d4-834f57bc4dde':
+      case '7ce2f72d-e69e-42a8-b040-a402e83f7304':
         return 'ORIGEM';
       default:
         return null;
