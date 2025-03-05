@@ -157,7 +157,7 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
       display: 'flex',         // Adicionar display flex
       flexDirection: 'column', // Organizar elementos verticalmente
     }}>
-      <div className="description">Clique e arraste o nó desejado.</div>
+      <div style={{margin:'0 auto 8px auto'}}>Clique e arraste o nó desejado.</div>
       <div className="dndnode menu" onDragStart={(event) => onDragStart(event, 'MENU')} draggable>
         Menu Node
       </div>
@@ -216,7 +216,7 @@ export const Sidebar = ({ onImport }: SidebarProps) => {
     </div>
 
     {/* Import section */}
-    <div style={{marginTop:'auto', marginBottom: '12px', fontSize: '15px'}}>Importar Fluxo (React flow)</div>
+    <div style={{marginTop:'auto', marginBottom: '12px', fontSize: '14px', margin:'auto auto 8px auto'}}>Importar Fluxo (React flow)</div>
     
     <div style={{ 
       // marginTop: 'auto',
