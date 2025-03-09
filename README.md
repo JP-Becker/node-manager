@@ -1,8 +1,8 @@
-# 📋Node Manager
+# 📋 Node Manager
 
-Uma representação visual para criação de fluxos de chatbot a partir de nós com diferentes tipos e atributos. A arquitetura na parte da plataforma de chatbot em si foi criada pelo meu amigo e colega Jackson, e, a ideia de criar essa aplicação veio da facilidade adicional que uma UI trás para o desenvolvimento, diminuindo muito o tempo para que levamos para criação de novos fluxos.
+Uma representação visual para criação de fluxos de chatbot a partir de nós com diferentes tipos e atributos. A arquitetura na parte da plataforma de chatbot em si foi criada pelo meu amigo e colega Jackson, e, a ideia de criar essa aplicação veio da facilidade adicional que uma UI trás para o desenvolvimento, diminuindo muito o tempo que levamos para criação de novos fluxos.
 
-## 🚀Main Features
+## 🚀 Main Features
   - Drag and drop nodes via sidebar
   - Deletar ou duplicar nodes
   - Deletar edges
@@ -16,7 +16,7 @@ Uma representação visual para criação de fluxos de chatbot a partir de nós 
 
 ## 🎥 Demonstração
 
-[Demo do projeto](link_para_gif_ou_screenshot)
+[Clique aqui para rodar a Demo do projeto](https://nodemanager.surge.sh/)
 
 ## 🛠 Tech stack
 
@@ -28,3 +28,7 @@ Uma representação visual para criação de fluxos de chatbot a partir de nós 
 
 - Dark mode
 - Autenticação de usuário e integração com bot forge
+
+## Print da aplicação
+![Print](https://snipboard.io/1bmuNo.jpg)
+
